@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="xxx.php" method="get">
+      <h4>input输入表单元素</h4>
+      1.<label for="text">text输入：</label><input type="text" name="textin" id="text" value="请输入" /> <br />
+      2.<label for="pwd">password输入：</label><input type="password" name="pwd" id="pwd" /> <br />
+      3.radio单选按钮(name是表单元素的名字，在这里性别单选按钮必须要有相同的name，才可以实现多选一)：<br />
+      <input type="radio" name="sex" id="man" value="男" /> <label for="man">男</label>
+      <input type="radio" name="sex" id="woman" value="女" /> <label for="woman">女</label>
+      <input type="radio" name="sex" id="others" value="其他" /> <label for="others">其他</label> <br />
+      4.checkbox复选按钮：<br />
+      <input type="checkbox" name="aihao" value="吃饭" />吃饭 <input type="checkbox" name="aihao" value="睡觉" /> 睡觉
+      <input type="checkbox" name="aihao" value="打豆豆" />打豆豆 <br />
+      5.3、2、1发射：<input type="submit" value="起飞" /> 重置：<input type="reset" /> <br />
+      6.<input type="button" value="这是一个普通的按钮，等后边结合JS" /> <br />
+      7.文件上传：<input type="file" />
+    </form>
+  </body>
+</html>
