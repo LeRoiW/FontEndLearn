@@ -1,0 +1,42 @@
+.box1 {
+  border: 1px dotted red;
+}
+.box1 .emmm {
+  border: 1px solid blue;
+}
+.box1 .emmm .col1 {
+  background-color: cadetblue;
+}
+.box1 .emmm .col2 {
+  background-color: darkgoldenrod;
+}
+.box1 .emmm .col3 {
+  background-color: mediumseagreen;
+}
+.box1 .emmm .col4 {
+  background-color: brown;
+}
+.box2 .c1 {
+  border: 1px solid green;
+  height: 50px;
+}
+.box2 .c1 .c2 {
+  background-color: brown;
+}
+.box2 .c1 .c3 {
+  background-color: coral;
+}
+.box3 .row div {
+  height: 50px;
+  background-color: cadetblue;
+}
+.box3 .row:nth-child(1) {
+  margin-bottom: 5px;
+}
+.box4 .row div {
+  height: 50px;
+  background-color: cadetblue;
+}
+.box4 .row div:nth-child(1) {
+  background-color: coral;
+}

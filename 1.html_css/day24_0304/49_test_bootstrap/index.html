@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- *引入bootst -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>bootstrap</title>
+  </head>
+  <body>
+    <div class="container">.container</div>
+    <div class="container-fluid">.container-fluid</div>
+    <code>&lt;section&gt;</code>
+    <h3>栅格系统的使用</h3>
+    <div class="container box1">
+      <div class="row emmm">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col1">1</div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col2">2</div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col3">3</div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col4">4</div>
+      </div>
+
+      <!-- 如果孩子的份数相加等于12 则孩子能占满整个 的container 的宽度 -->
+      <div class="row emmm">
+        <div class="col-lg-6 col1">1</div>
+        <div class="col-lg-2 col2">2</div>
+        <div class="col-lg-2 col3">3</div>
+        <div class="col-lg-2 col4">4</div>
+      </div>
+
+      <!-- 如果孩子的份数相加 小于 12 则会？ 则占不满整个container 的宽度 会有空白 -->
+      <div class="row emmm">
+        <div class="col-lg-6 col1">1</div>
+        <div class="col-lg-2 col2">2</div>
+        <div class="col-lg-2 col3">3</div>
+        <div class="col-lg-1 col4">4</div>
+      </div>
+
+      <!-- 如果孩子的份数相加 大于 12 则会？多于的那一列会 另起一行显示  -->
+      <div class="row emmm">
+        <div class="col-lg-6 col1">1</div>
+        <div class="col-lg-2 col2">2</div>
+        <div class="col-lg-2 col3">3</div>
+        <div class="col-lg-3 col4">4</div>
+      </div>
+    </div>
+    <h4>列嵌套</h4>
+    <div class="container box2">
+      <div class="row">
+        <div class="col-md-4 c1">
+          <!-- 我们列嵌套最好加1个行 row 这样可以取消父元素的padding值 而且高度自动和父级一样高 -->
+          <div class="row">
+            <div class="col-md-4 c2">a</div>
+            <div class="col-md-8 c3">b</div>
+          </div>
+        </div>
+        <div class="col-md-4 c1">2</div>
+        <div class="col-md-4 c1">3</div>
+      </div>
+    </div>
+    <h4>列偏移</h4>
+    <div class="container box3">
+      <div class="row">
+        <div class="col-md-3">左侧</div>
+        <!-- 偏移的份数 就是 12 - 两个盒子的份数 = 6 -->
+        <div class="col-md-3 col-md-offset-6">右侧</div>
+      </div>
+      <div class="row">
+        <!-- 如果只有一个盒子 那么就偏移 = (12 - 8) /2 -->
+        <div class="col-md-8 col-md-offset-2">中间盒子</div>
+      </div>
+    </div>
+    <h4>列排序</h4>
+    <div class="container box4">
+      <div class="row">
+        <div class="col-md-4 col-md-push-8">左侧</div>
+        <div class="col-md-8 col-md-pull-4">右侧</div>
+      </div>
+    </div>
+  </body>
+</html>
