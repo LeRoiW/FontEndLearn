@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myMath</title>
+    <script>
+      // myMath
+      var myMath = {
+        PI: 3.1415926535,
+        max: function () {
+          var max = arguments[0];
+          for (var i = 0; i < arguments.length; i++) {
+            if (arguments[i] > max) {
+              max = arguments[i];
+            }
+          }
+          return max;
+        },
+        min: function () {
+          var min = arguments[0];
+          for (var i = 0; i < arguments.length; i++) {
+            if (arguments[i] < min) {
+              min = arguments[i];
+            }
+          }
+          return min;
+        },
+      };
+      console.log(myMath.PI);
+      console.log(myMath.max(1, 2, 4, -2, 5, 9, 12, -4, 11));
+      console.log(myMath.min(12, 2, 4, -2, 5, 9, 12, -4, 11));
+      // Math内置对象
+      console.log(Math.PI);
+      console.log(Math.max(1, 2, 4, -2, 5, 9, 12, -4, 11));
+      console.log(Math.random());
+    </script>
+  </head>
+  <body></body>
+</html>
