@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>新浪下拉菜单</title>
+    <title>下拉菜单</title>
     <style>
       * {
         margin: 0;
@@ -115,16 +115,16 @@
     </ul>
     <script>
       // 1. 获取元素
-      var nav = document.querySelector(".nav");
-      var lis = nav.children; // 得到4个小li
+      var nav = document.querySelector('.nav')
+      var lis = nav.children // 得到4个小li
       // 2.循环注册事件
       for (var i = 0; i < lis.length; i++) {
         lis[i].onmouseover = function () {
-          this.children[1].style.display = "block";
-        };
+          this.children[1].style.display = 'block'
+        }
         lis[i].onmouseout = function () {
-          this.children[1].style.display = "none";
-        };
+          this.children[1].style.display = 'none'
+        }
       }
     </script>
   </body>
