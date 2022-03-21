@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>鼠标点击盒子坐标</title>
+    <style>
+      .box {
+        width: 300px;
+        height: 300px;
+        background-color: cadetblue;
+        margin: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <script>
+      var box = document.querySelector(".box");
+      box.addEventListener("mousemove", function (e) {
+        var x = e.pageX - this.offsetLeft;
+        var y = e.pageY - this.offsetTop;
+        this.innerHTML =
+          "鼠标：(" +
+          e.pageX +
+          "),(" +
+          e.pageY +
+          ") <br /> 盒子：(" +
+          this.offsetLeft +
+          "),(" +
+          this.offsetTop +
+          ") <br /> 鼠标相对盒子：(" +
+          x +
+          "),(" +
+          y +
+          ")";
+      });
+    </script>
+  </body>
+</html>
