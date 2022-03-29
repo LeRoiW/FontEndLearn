@@ -1,8 +1,8 @@
-# 基础部分
+# HTML&CSS
 
 [TOC]
 
-## HTML
+## HTML 基础
 
 ### 常用标签
 
@@ -174,7 +174,7 @@ select 中至少包含一对`<option>`
 
 ---
 
-## CSS
+## CSS 基础
 
 ### 一、CSS 规范等
 
