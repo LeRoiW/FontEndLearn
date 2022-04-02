@@ -500,3 +500,107 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
 ![盒模型](HTML&CSS_img/box-model.gif)
 
 #### 10.2 边框(border)
+
+1. 组成及简写
+
+   - 边框宽度`border-width`
+   - 边框样式`border-style`
+   - 边框颜色`border-color`
+   - 简写(没有顺序区别)`border: 1px solid red;`
+
+2. 表格的细线边框
+
+   ```css
+   /*相邻边框合并在一起*/
+   border-collapse: collapse;
+   ```
+
+3. 边框会影响盒子的实际大小(额外增加)
+
+#### 10.3 内边距(padding)
+
+1. 写法
+
+   ```css
+   /*上下左右都有5px的边距*/
+   padding: 5px;
+   /*上下5px 左右10px*/
+   padding: 5px 10px;
+   /*上5px 左右10px 下20px*/
+   padding: 5px 10px 20px;
+   /*上5px 右10px 下20px 左30px*/
+   padding: 5px 10px 20px 30px;
+   ```
+
+2. padding 影响盒子的实际大小
+3. 如果盒子本身没有指定 width/height 属性，则此时的 padding 不会撑开盒子
+
+**技巧**：不设置块(行内块)的 width，而是通过 padding 使各块的内边距相同
+![padding技巧](HTML&CSS_img/10-1.png)
+
+#### 10.4 外边距(margin)
+
+1. 简写方式与 padding 相同
+2. 让块级盒子水平居中
+   - 盒子必须指定了宽度
+   - 盒子左右外边距都设置为 auto
+     - `margin: 0 auto;`
+   - 行内元素/行内块：`text-aling : center;`
+3. 外边距合并
+
+   - 使用 margin 定义块元素的垂直外边距时
+     - 相邻块元素垂直外边距的合并
+     - 嵌套块元素垂直外边距的塌陷
+   - 合并
+     - 上下两个相邻的块元素，如果上边的块有 margin-bottom，下面的元素有 margin-top，则它们的垂直间距为 MAX{margin-top,margin-bottom}
+     - 解决方法：尽量只给一个盒子添加 margin 值
+       ![合并](HTML&CSS_img/10-2.png)
+   - 嵌套块元素垂直外边距塌陷
+
+     - 对于两个嵌套关系的块元素，父元素有上边距的同时子元素也有，此时父元素会塌陷较大的外边距值
+     - 解决方法：
+
+       1. 为父元素定义上边框
+       2. 为父元素定义 padding-top
+       3. ▲ 为父元素添加 overflow:hidden
+
+       ![外边距塌陷](HTML&CSS_img/10-3.png)
+
+#### 10.5 清除网页元素(浏览器默认)内外边距
+
+```css
+/* css的第一行代码 */
+* {
+  padding: 0;
+  margin: 0;
+  /* 去掉li前边的项目符号 */
+  list-style: none;
+}
+```
+
+行内元素尽量只设置左右边距，不设置上下边距
+
+#### 10.6 圆角边框(border-radius)
+
+`border-radius:length;`  
+length：半径，可以为数值或百分比  
+圆形：将正方形的圆角设为 50%
+
+#### 10.7 盒子阴影(box-shadow)
+
+`box-shadow:h-shadow v-shadow blur spread color inset;`  
+阴影不占用空间，不影响其他盒子排列
+| 属性 | 说明 |
+| :------: | :------: |
+| h-shadow | 水平阴影位置，可<0，必需 |
+| v-shadow | 垂直阴影位置，可<0，必需 |
+| blur | 模糊距离 |
+| spread | 尺寸 |
+| color | rgba(0,0,0,.3) |
+| inset | 内部阴影，默认值:outset(外部阴影) |
+
+#### 10.8 文字阴影(text-shadow)
+
+`text-shadow:h-shadow v-shadow blur color;`
+
+### 十一、浮动(float)
