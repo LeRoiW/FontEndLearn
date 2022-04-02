@@ -552,9 +552,12 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
      - 相邻块元素垂直外边距的合并
      - 嵌套块元素垂直外边距的塌陷
    - 合并
+
      - 上下两个相邻的块元素，如果上边的块有 margin-bottom，下面的元素有 margin-top，则它们的垂直间距为 MAX{margin-top,margin-bottom}
      - 解决方法：尽量只给一个盒子添加 margin 值
+
        ![合并](HTML&CSS_img/10-2.png)
+
    - 嵌套块元素垂直外边距塌陷
 
      - 对于两个嵌套关系的块元素，父元素有上边距的同时子元素也有，此时父元素会塌陷较大的外边距值
