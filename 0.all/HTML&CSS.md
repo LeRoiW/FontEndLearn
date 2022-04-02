@@ -819,3 +819,19 @@ auto -> 在需要时添加滚动条
 2. 自身属性：width/height/margin/padding/border/background
 3. 文本属性：color/font/text-decoration/text-align/vertical-align/white-space/break-word
 4. 其他属性：content/cursor/border-radius/box-shadow/text-shadow/background:liner-gradient...
+
+### 十五、CSS 技巧
+
+#### 15.1 版心&导航栏
+
+1. 可以将版心定义为公共类
+
+   ```css
+   .w {
+     width: 1200px;
+     margin: auto;
+   }
+   ```
+
+2. 导航栏
+   - 实际开发中，使用`<li><li/>`包含链接`<a/>`的方法 => 更有条理；避免搜索引擎降权
