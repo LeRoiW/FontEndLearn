@@ -838,3 +838,103 @@ auto -> 在需要时添加滚动条
 
 2. 导航栏
    - 实际开发中，使用`<li><li/>`包含链接`<a/>`的方法 => 更有条理；避免搜索引擎降权
+
+#### 15.2 精灵图
+
+**目的**：为了有效减少服务器接收和发送请求的次数，提高页面的加载速度  
+**核心原理**：将网页中的一些小背景图整合到一张大图中，服务器只需要一次请求即可
+
+1. 主要针对背景图片使用
+2. 大图片又被称为 sprites 精灵图或雪碧图
+3. 移动背景图片位置，使用`background-position`
+4. 移动 X、Y
+
+#### 15.3 字体图标(iconfont)
+
+主要用于显示网页中通用、常用的一些小图标(看起来是图标，本质是字体，可以设置大小、颜色等；**无法代替精灵图**)
+
+#### 15.4 CSS 三角
+
+```css
+div {
+  width: 0;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  border: 10px solid transparent;
+  border-left-color: red;
+}
+```
+
+![合并](HTML&CSS_img/15-1.png)
+
+#### 15.5 界面样式
+
+1. 鼠标样式(cursor)
+
+   `li{cursor:pointer;}`  
+   default:默认 | pointer:小手 | move:移动 | text:文本 | not-allowed:禁止
+
+2. 表单轮廓线(outline)
+
+   `input{outline:none;}`
+
+3. 防止拖拽文本域(resize)
+
+   `textarea{resize:none;}`
+
+#### 15.6 vertical-align
+
+1. 经常用于设置图片或者表单(行内块元素)和文字垂直对齐
+
+   `vertical-align:baseline|top|middle|bottom`  
+   baseline:默认，放在父元素的基线上  
+   top:把元素顶端与行内最高元素的顶端对齐  
+   middle:把元素放在父元素的中部  
+   bottom:把元素顶端与行内最低元素的顶端对齐
+
+2. 解决图片底部默认空白缝隙问题
+
+   - 给图片添加`vertical-align`属性(不能是 baseline)
+   - 把图片转化为块级元素
+
+#### 15.7 溢出的文字使用省略号显示
+
+1. 单行文本
+
+   ```css
+   /* 1. 强制一行内显示文本，默认为normal多行显示 */
+   white-space: nowrap;
+   /* 2. 超出部分隐藏 */
+   overflow: hidden;
+   /* 3. 文字用省略号代替超出的部分 */
+   text-overflow: ellipsis;
+   ```
+
+2. 多行文本
+
+   有较大兼容性问题，适合 webkit 内核浏览器或者移动端
+
+   ```css
+   overflow: hidden;
+   text-overflow: ellipsis;
+   /* 弹性伸缩盒子模型显示 */
+   display: -webkit-box;
+   /* 限制在一个块元素显示的文本的行数 */
+   -webkit-line-clamp: 2;
+   /* 设置或检索伸缩盒对象的子元素的排列方式 */
+   -webkit-box-orient: vertial;
+   ```
+
+#### 15.8 常见布局技巧
+
+1. margin 负值运用
+
+   - 让每个盒子 margin 往左移动 x px 正好压住相邻盒子的边框
+   - 鼠标经过某个盒子时提高当前盒子的层级即可 //边框变化
+
+     没有定位，则加相对定位，有定位加 z-index
+
+2. 文字围绕浮动元素
+
+   运用浮动元素不会压住盒子的特性
