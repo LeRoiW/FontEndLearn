@@ -938,3 +938,68 @@ div {
 2. 文字围绕浮动元素
 
    运用浮动元素不会压住盒子的特性
+
+3. 行内块制作页码
+4. 三角强化
+
+![合并](HTML&CSS_img/15-2.png)
+
+```html
+<div class="price">
+  <span class="miaosha">
+    ¥1650
+    <i></i>
+  </span>
+  <span class="origin">¥5650</span>
+</div>
+```
+
+```html
+<style>
+  .price {
+    width: 160px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid red;
+    margin: 0 auto;
+  }
+  .miaosha {
+    position: relative;
+    float: left;
+    width: 90px;
+    height: 100%;
+    background-color: red;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+  .miaosha i {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-color: transparent #fff transparent transparent;
+    border-style: solid;
+    border-width: 24px 10px 0 0;
+  }
+  .origin {
+    font-size: 12px;
+    color: gray;
+    text-decoration: line-through;
+  }
+</style>
+```
+
+#### 15.9 CSS 初始化
+
+不同 Browser 对有些标签的默认样式不同，初始化可以消除对于 HTML 的差异 -> 重设 Browser 的样式
+
+---
+
+## 第三部分 HTML&CSS 进阶
+
+### 一、HTML5 新特性
+
+### 二、CSS3 新特性
