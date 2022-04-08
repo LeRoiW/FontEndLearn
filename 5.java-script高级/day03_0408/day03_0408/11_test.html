@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>改变函数内this指向call方法</title>
+  </head>
+  <body>
+    <script>
+      // 1. call()
+      var o = {
+        name: 'andy',
+      }
+      function fn(a, b) {
+        console.log(this)
+        console.log(a + b)
+      }
+      fn.call(o, 1, 2)
+      // call 第一个可以调用函数 第二个可以改变函数内的this 指向
+      // call 的主要作用可以实现继承
+      function Father(uname, age, sex) {
+        this.uname = uname
+        this.age = age
+        this.sex = sex
+      }
+      function Son(uname, age, sex) {
+        Father.call(this, uname, age, sex)
+      }
+      var son = new Son('刘德华', 18, '男')
+      console.log(son)
+
+      console.log('----------示例----------')
+      function Product(pname, price) {
+        console.log(this)
+        this.pname = pname
+        this.price = price
+        console.log(this)
+        return 1
+      }
+      function Food(fname, price) {
+        console.log('food使用call')
+        var ret = Product.call(this, fname, price)
+      }
+      function Toy(tname, price) {
+        console.log('toy使用call')
+        Product.call(this, tname, price)
+      }
+      var cheese = new Food('cheese', 5)
+      var car = new Toy('car', 6)
+      console.dir(cheese)
+      console.dir(car)
+    </script>
+  </body>
+</html>
