@@ -874,7 +874,7 @@ div {
 }
 ```
 
-![合并](HTML&CSS_img/15-1.png)
+![CSS三角](HTML&CSS_img/15-1.png)
 
 #### 15.5 界面样式
 
@@ -950,7 +950,7 @@ div {
 3. 行内块制作页码
 4. 三角强化
 
-![合并](HTML&CSS_img/15-2.png)
+![三角强化](HTML&CSS_img/15-2.png)
 
 ```html
 <div class="price">
@@ -1135,3 +1135,62 @@ input::placeholder {
 - 字体图标
 - 视参遮罩
 - [清除浮动](#116-清除浮动的方法)
+
+#### 2.2 CSS3 盒子模型
+
+&emsp;可以通过`box-sizing`来指定盒模型
+
+- `box-sizing:content-box`盒子大小为`width+padding+border`(以前默认)
+- `box-sizing:border-box`盒子大小为`width`
+
+#### 2.3 图片模糊
+
+&emsp;CSS3 滤镜 `filter:function()`：将模糊或颜色偏移等用图形效果应用于元素
+
+#### 2.4 calc 函数
+
+&emsp;在声明 CSS 属性时进行一些计算
+&emsp;`width:calc(100%-80px);`
+
+#### 2.5 CSS3 过渡
+
+&emsp;不使用 Flash 或 Javascript 的情况下，当元素从一种样式变为另一种样式时为元素添加效果  
+&emsp;过渡动画：是从一个状态渐渐过渡到另一个状态  
+&emsp;经常和`:hover`搭配使用  
+&emsp;**谁做过渡给谁加**
+
+```css
+transition: 要过渡的属性 花费时间 运动曲线 延迟触发时间;
+/* 要过渡的属性:if都要变则设置all */
+/* 花费时间:单位s，必写 */
+/* 运动曲线:默认为ease */
+/* 延迟触发时间:单位s，默认为0 */
+```
+
+![运动曲线](HTML&CSS_img/transition.png)
+
+#### 2.6 网站 favicon 图标
+
+&emsp;一般用于缩略的网站标志，显示在 Browser 地址栏或标签上  
+&emsp;格式：.ico ---- 放在网站根目录
+
+#### 2.7 网站 TDK 三大标签 SEO 优化
+
+1. SEO(Search Engine Optimization)搜索引擎优化
+
+   利用搜索引擎的规则提高网站在有关搜索引擎内**自然排名**的方式
+
+2. 三大标签
+
+   - title：网站名(产品名)-网站介绍(<30 汉字)
+   - description
+   - keyword：6~8 个; keyword1,keyword2...
+
+3. logo SEO 优化
+
+   - logo 里面首先放一个 h1 标签
+   - h1 里边再放一个链接，可以返回首页，把 logo 的背景图片给链接即可
+   - 链接里边放网站名字，但是文字不显示出来
+     - 移到盒子外边`text-indent:-9999px;overflow:hidden;`(tb 做法)
+     - 直接给`font-size:0;`(jd 做法)
+   - 给链接一个 title 属性 => 鼠标放在上边可以显示提示文字
