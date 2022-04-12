@@ -34,15 +34,16 @@
 
 #### 1.6 图像标签
 
-1. `<img src="图像URL"/>`  
-   | 属性名称 | 值 | 备注 |
-   | :-----: | :-----: | :---: |
-   | src | 图片路径 | 必须属性 |
-   | alt | 文本 | 替换文本，img 不能显示时的文字 |
-   | title | 文本 | 提示文本，鼠标放上去的时候显示的文字 |
-   | width | px | img 的高 |
-   | height | px | img 的高 |
-   | border | px | img 的边框粗细 |
+1. `<img src="图像URL"/>`
+
+   | 属性名称 |    值    |                 备注                 |
+   | :------: | :------: | :----------------------------------: |
+   |   src    | 图片路径 |               必须属性               |
+   |   alt    |   文本   |    替换文本，img 不能显示时的文字    |
+   |  title   |   文本   | 提示文本，鼠标放上去的时候显示的文字 |
+   |  width   |    px    |               img 的高               |
+   |  height  |    px    |               img 的高               |
+   |  border  |    px    |            img 的边框粗细            |
 
 2. 路径
    - 相对路径
@@ -55,8 +56,8 @@
 1. href 是必须属性，目标的 URL 地址；target 设为\_blank 代表新窗口打开
 2. 空链接：`<a href="#" >页面名称</a>`
 3. 锚点链接
-   1. 链接文本的 href 属性设为名字：`<a href="#two">二</a>`
-   2. 目标位置标签加一个 Id 属性=名字：`<h3 id="two">第二页</h3>`
+   - 链接文本的 href 属性设为名字：`<a href="#two">二</a>`
+   - 目标位置标签加一个 Id 属性=名字：`<h3 id="two">第二页</h3>`
 
 #### 1.8 表格标签
 
@@ -136,13 +137,14 @@
 1. input 输入表单元素
 
    `<input type="属性值">`
-   | 属性值 | 备注 | 属性值 | 备注 |
-   | :-----: | :-------: | :----: | :-------: |
-   | button | 可点击按钮 | checkbox | 复选框 |
-   | file | 输入字段和提交按钮，供文件上传 | hidden | 隐藏的输入字段 |
-   | image | 图像形式的提交按钮 | password | 密码字段，其中的字符被掩码 |
-   | radio | 单选按钮 | reset | 重置，清除表单中的所有数据 |
-   | submit | 提交 | text | 单行输入字段，默认宽度 20 字符 |
+
+   | 属性值 |              备注              |  属性值  |              备注              |
+   | :----: | :----------------------------: | :------: | :----------------------------: |
+   | button |           可点击按钮           | checkbox |             复选框             |
+   |  file  | 输入字段和提交按钮，供文件上传 |  hidden  |         隐藏的输入字段         |
+   | image  |       图像形式的提交按钮       | password |   密码字段，其中的字符被掩码   |
+   | radio  |            单选按钮            |  reset   |   重置，清除表单中的所有数据   |
+   | submit |              提交              |   text   | 单行输入字段，默认宽度 20 字符 |
 
 2. input 的其他属性
 
@@ -464,7 +466,6 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
 > 同一个元素指定多个选择器产生优先级
 
 1. 选择器相同 => 执行层叠性
-
 2. 选择器不同 => 根据选择器权重执行
 
    |      权重类型       |   权重   |
@@ -477,15 +478,12 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
    |    `!important`     |    ∞     |
 
 3. 注意事项
-
    - 权重由四位数字组成，但是不会有进位
    - 可以理解为 类>元素，ID>类...
    - 等级判定从左至右，相同则看下一位
    - 继承的权重最低，不管父元素的权重
    - `<a/>`,链接浏览器默认有一个样式
-
 4. 权重叠加
-
    > eg.  
    > div ul li -> 0,0,0,3  
    > .nav ul li -> 0,0,1,2
@@ -503,12 +501,10 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
 #### 10.2 边框(border)
 
 1. 组成及简写
-
    - 边框宽度`border-width`
    - 边框样式`border-style`
    - 边框颜色`border-color`
    - 简写(没有顺序区别)`border: 1px solid red;`
-
 2. 表格的细线边框
 
    ```css
@@ -553,22 +549,19 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
      - 相邻块元素垂直外边距的合并
      - 嵌套块元素垂直外边距的塌陷
    - 合并
-
      - 上下两个相邻的块元素，如果上边的块有 margin-bottom，下面的元素有 margin-top，则它们的垂直间距为 MAX{margin-top,margin-bottom}
      - 解决方法：尽量只给一个盒子添加 margin 值
 
-       ![合并](HTML&CSS_img/10-2.png)
+   ![合并](HTML&CSS_img/10-2.png)
 
    - 嵌套块元素垂直外边距塌陷
-
      - 对于两个嵌套关系的块元素，父元素有上边距的同时子元素也有，此时父元素会塌陷较大的外边距值
      - 解决方法：
-
        1. 为父元素定义上边框
        2. 为父元素定义 padding-top
        3. ▲ 为父元素添加 overflow:hidden
 
-       ![外边距塌陷](HTML&CSS_img/10-3.png)
+   ![外边距塌陷](HTML&CSS_img/10-3.png)
 
 #### 10.5 清除网页元素(浏览器默认)内外边距
 
@@ -607,7 +600,7 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
 
 #### 10.8 文字阴影(text-shadow)
 
-`text-shadow:h-shadow v-shadow blur color;`
+&emsp;`text-shadow:h-shadow v-shadow blur color;`
 
 ### 十一、浮动(float)
 
@@ -793,10 +786,8 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
 #### 12.5 其他特性
 
 1. 绝对定位的盒子水平居中(无法通过`margin:0 auto;`实现)
-
    - left(top)走 50%父容器 width(height)
    - margin 往 left(top)走自己盒子 width(height)的**负**的一半
-
 2. 定位特殊特性(绝对定位和固定定位也和浮动类似)
    - 添加绝对定位/固定定位后可以直接设置 width/height -> 行内元素
    - 添加绝对定位/固定定位后如果不给 width/height，则默认大小是内容大小 -> 块级元素
@@ -879,30 +870,26 @@ div {
 #### 15.5 界面样式
 
 1. 鼠标样式(cursor)
-
    `li{cursor:pointer;}`  
    default:默认 | pointer:小手 | move:移动 | text:文本 | not-allowed:禁止
-
 2. 表单轮廓线(outline)
-
    `input{outline:none;}`
-
 3. 防止拖拽文本域(resize)
-
    `textarea{resize:none;}`
 
 #### 15.6 vertical-align
 
 1. 经常用于设置图片或者表单(行内块元素)和文字垂直对齐
 
-   `vertical-align:baseline|top|middle|bottom`  
-   baseline:默认，放在父元素的基线上  
-   top:把元素顶端与行内最高元素的顶端对齐  
-   middle:把元素放在父元素的中部  
-   bottom:把元素顶端与行内最低元素的顶端对齐
+   ```css
+   vertical-align: baseline|top|middle|bottom;
+   /* baseline:默认，放在父元素的基线上 */
+   /* top:把元素顶端与行内最高元素的顶端对齐 */
+   /* middle:把元素放在父元素的中部 */
+   /* bottom:把元素顶端与行内最低元素的顶端对齐 */
+   ```
 
 2. 解决图片底部默认空白缝隙问题
-
    - 给图片添加`vertical-align`属性(不能是 baseline)
    - 把图片转化为块级元素
 
@@ -920,7 +907,6 @@ div {
    ```
 
 2. 多行文本
-
    有较大兼容性问题，适合 webkit 内核浏览器或者移动端
 
    ```css
@@ -937,16 +923,11 @@ div {
 #### 15.8 常见布局技巧
 
 1. margin 负值运用
-
    - 让每个盒子 margin 往左移动 x px 正好压住相邻盒子的边框
    - 鼠标经过某个盒子时提高当前盒子的层级即可 //边框变化
-
      没有定位，则加相对定位，有定位加 z-index
-
 2. 文字围绕浮动元素
-
    运用浮动元素不会压住盒子的特性
-
 3. 行内块制作页码
 4. 三角强化
 
@@ -1031,12 +1012,9 @@ div {
 &emsp;Chrome 禁用了自动播放
 
 1. 音频
-
    `<audio src = "URL" controls="controls" > < /audio>`
    格式:MP3、Wav、Ogg
-
 2. 视频
-
    `<video src = "URL" controls="controls" > < /video>`
    格式:MP4、WebM、Ogg
    添加 muted 属性可以自动播放
@@ -1047,8 +1025,8 @@ div {
 
 > email、url、date、time、month、week、number
 
-&emsp;手机号码：tel  
-&emsp;搜索框：search  
+&emsp;手机号码：tel
+&emsp;搜索框：search
 &emsp;生成一个颜色或表单：color
 
 #### 1.4 表单属性
@@ -1154,9 +1132,9 @@ input::placeholder {
 
 #### 2.5 CSS3 过渡
 
-&emsp;不使用 Flash 或 Javascript 的情况下，当元素从一种样式变为另一种样式时为元素添加效果  
-&emsp;过渡动画：是从一个状态渐渐过渡到另一个状态  
-&emsp;经常和`:hover`搭配使用  
+&emsp;不使用 Flash 或 Javascript 的情况下，当元素从一种样式变为另一种样式时为元素添加效果
+&emsp;过渡动画：是从一个状态渐渐过渡到另一个状态
+&emsp;经常和`:hover`搭配使用
 &emsp;**谁做过渡给谁加**
 
 ```css
@@ -1171,23 +1149,18 @@ transition: 要过渡的属性 花费时间 运动曲线 延迟触发时间;
 
 #### 2.6 网站 favicon 图标
 
-&emsp;一般用于缩略的网站标志，显示在 Browser 地址栏或标签上  
+&emsp;一般用于缩略的网站标志，显示在 Browser 地址栏或标签上
 &emsp;格式：.ico ---- 放在网站根目录
 
 #### 2.7 网站 TDK 三大标签 SEO 优化
 
 1. SEO(Search Engine Optimization)搜索引擎优化
-
    利用搜索引擎的规则提高网站在有关搜索引擎内**自然排名**的方式
-
 2. 三大标签
-
    - title：网站名(产品名)-网站介绍(<30 汉字)
    - description
    - keyword：6~8 个; keyword1,keyword2...
-
 3. logo SEO 优化
-
    - logo 里面首先放一个 h1 标签
    - h1 里边再放一个链接，可以返回首页，把 logo 的背景图片给链接即可
    - 链接里边放网站名字，但是文字不显示出来
