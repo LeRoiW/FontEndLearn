@@ -1167,3 +1167,64 @@ transition: 要过渡的属性 花费时间 运动曲线 延迟触发时间;
      - 移到盒子外边`text-indent:-9999px;overflow:hidden;`(tb 做法)
      - 直接给`font-size:0;`(jd 做法)
    - 给链接一个 title 属性 => 鼠标放在上边可以显示提示文字
+
+### 三、2D 转换
+
+> 转换(transform)可以实现元素的位移、旋转、缩放等
+>
+> > 移动：translate
+> > 旋转：rotate
+> > 缩放：scale
+
+#### 3.1 二维坐标系
+
+#### 3.2 移动(translate)
+
+```css
+transform: translate(x, y);
+transform: translateX(n);
+transform: translateY(n);
+```
+
+1. 最大的优点：**不会影响**其他元素的位置
+2. 百分比单位是相对于**自身元素**的；`translate(50%,50%)`中的 50%都是自身的 h、w
+3. 对行内标签没有效果
+
+#### 3.3 旋转(rotate)
+
+```css
+transform: rotate(deg);
+```
+
+1. 单位是 deg
+2. 角度>0,顺时针；<0,逆时针
+3. 旋转中心点是元素的中心点
+
+#### 3.4 2D 旋转中心点
+
+```css
+transform-origin: x y;
+```
+
+1. 默认中心点是元素的中心点(50%,50%)
+2. 可以给 x y 设置像素或方位名词(top/bottom/left/right/center)
+
+#### 3.5 缩放(scale)
+
+```css
+transform: scale(x, y);
+```
+
+1. (x, y)对应放大倍数
+2. **不会影响其他盒子**，且可以设置缩放的中心点
+
+#### 3.6 综合写法
+
+```css
+transform: translate() rotate() scale();
+```
+
+1. **顺序会影响转换效果**(先旋转会改变坐标轴方向)
+2. 同时有位移和其他属性时，将位移放在最前
+
+### 四、CSS3 动画
