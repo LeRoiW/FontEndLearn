@@ -1002,4 +1002,105 @@ div {
 
 ### 一、HTML5 新特性
 
+#### 1.1 新增语义标签
+
+```html
+<header>头部</header>
+<nav>导航</nav>
+<article>内容</article>
+<section>定义文档某个区域(块级标签，类似大号div)</section>
+<aside>侧边栏</aside>
+<footer>尾部</footer>
+```
+
+1. 主要是针对搜索引擎的
+2. 页面中可以多次使用
+3. 在 IE9 中需要将这些元素转化为块级元素
+4. 移动端使用更加广泛
+
+#### 1.2 多媒体标签
+
+Chrome 禁用了自动播放
+
+1. 音频
+
+   `<audio src = "URL" controls="controls" > < /audio>`
+   格式:MP3、Wav、Ogg
+
+2. 视频
+
+   `<video src = "URL" controls="controls" > < /video>`
+   格式:MP4、WebM、Ogg
+   添加 muted 属性可以自动播放
+
+#### 1.3 input 类型(type=)
+
+限制用户输入类型
+
+> email、url、date、time、month、week、number
+
+手机号码：tel  
+搜索框：search  
+生成一个颜色或表单：color
+
+#### 1.4 表单属性
+
+|     名称     |   属性    |                      说明                      |
+| :----------: | :-------: | :--------------------------------------------: |
+|   required   | required  |              表示表单内容不能为空              |
+| placeholder  | 提示文本  |          提示信息，存在默认值将不显示          |
+|  autofocus   | autofocus |   自动聚焦，页面加载完成后自动聚焦到指定表单   |
+| autocomplete |  off/on   | Browser 基于之前键入的值，显示出选项，默认打开 |
+|   multiple   | multiple  |                可以多选文件提交                |
+
+```css
+/* 修改placeholder里的字体颜色 */
+input::placeholder {
+  color: gray;
+}
+```
+
 ### 二、CSS3 新特性
+
+#### 2.1 新增选择器
+
+类选择器、属性选择器、伪类选择器的权重为 10
+
+##### 2.1.1 属性选择器
+
+可以根据元素特定属性来选择元素，不用借助类或 ID
+
+|                 |                                               |
+| :-------------: | :-------------------------------------------: |
+|    `E[att]`     |          选择具有 att 属性的 E 元素           |
+| `E[att="val"]`  |  ▲ 选择具有 att 属性且属性值为 val 的 E 元素  |
+| `E[att^="val"]` | 匹配具有 att 属性且属性值以 val 开头的 E 元素 |
+| `E[att$="val"]` | 匹配具有 att 属性且属性值以 val 结尾的 E 元素 |
+| `E[att*="val"]` | 匹配具有 att 属性且属性值中含有 val 的 E 元素 |
+
+##### 2.1.2 结构伪类选择器
+
+主要根据文档结构来选择元素，常用于根据父级选择子元素
+
+|                    |                                            |
+| :----------------: | :----------------------------------------: |
+|  `E:first-child`   |        匹配父元素中的第一个子元素 E        |
+|   `E:last-child`   |       匹配父元素中的最后一个子元素 E       |
+|  `E:nth-child(n)`  |       匹配父元素中的第 n 个子元素 E        |
+| `E:first-of-type`  |  匹配父元素中第一个类型为 type 的子元素 E  |
+|  `E:last-of-type`  | 匹配父元素中最后一个类型为 type 的子元素 E |
+| `E:nth-of-type(n)` | 匹配父元素中第 n 个类型为 type 的子元素 E  |
+
+`E:nth-child(n)`选择某个父元素的一个或多个特定条件的子元素
+: 数字：选第 n 个
+: 关键字：even 选偶数的；odd 选奇数的
+: 公式：从 0 开始计算，但是第 0 个和超出元素个数的会被忽略
+
+2n：偶数，等同 even  
+2n+1：奇数，等同于 odd  
+n+5：从第 5 个开始(包含第 5 个)到最后  
+-n+5：前 5 个(包含第 5 个)
+
+前 3 个和后 3 个的区别
+: `nth-child`会把所有的盒子进行排序，不管类型；执行的时候先看`nth-child(n)`，后看 E
+: `nth-of-type`只把指定类型的盒子进行排序；执行的时候先看 E，之后再看`nth-of-type(n)`
