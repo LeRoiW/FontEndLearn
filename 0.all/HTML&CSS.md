@@ -1393,6 +1393,9 @@ transform-style: preserve-3d;
 
 ##### 6.2.5 meta 视口标签
 
+> viewport 标签只对移动端浏览器有效，对 PC 端浏览器是无效的  
+> 当前缩放值 = 理想视口宽度 / 视觉视口宽度
+
 ```html
 <!-- 标准设置 -->
 <!-- device-width - 设备的宽度 -->
