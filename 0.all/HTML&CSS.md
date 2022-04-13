@@ -1317,8 +1317,8 @@ transform: translateZ();
 
 ![perspective&translatez](HTML&CSS_img/perspective&translatez.png)
 
-1. d,视距 是指从当前视角(人眼)到所看平面(屏幕)的距离
-2. z,z 轴 指的是从所看平面到推进视角之间的距离，大白话就是从当前距离 把你看的拉进或者拉远的距离
+1. d,视距 -> 是指从当前视角(人眼)到所看平面(屏幕)的距离
+2. z,z 轴 -> 指的是从所看平面到推进视角之间的距离，大白话就是从当前距离 把你看的拉进或者拉远的距离
 3. 人的视角在 3D 投影效果中是 近大远小
 
 #### 5.3 3D 旋转(rotate3d)
@@ -1346,3 +1346,64 @@ transform-style: preserve-3d;
 ```
 
 &emsp;代码写给父级，但是影响子元素
+
+### 六、移动端开发基础
+
+> 兼容移动端主流浏览器，处理 webkit 内核浏览器即可
+
+#### 6.1 调试方法
+
+1. Chrome DevTools
+2. 搭建本地 Web 服务器，通过手机访问服务器
+3. 使用外网服务器，直接访问 IP 或域名
+
+#### 6.2 视口(viewport)
+
+> &emsp;在 PC 端，视口指的是浏览器的可视区域，其宽度和浏览器窗口的宽度保持一致。在 CSS 标准文档中，视口也被称为初始包含块，它是所有 CSS 百分比宽度推算的根源，给 CSS 布局限制了一个最大宽度。  
+> &emsp;而移动端则较为复杂，它涉及到三个视口：布局视口（Layout Viewport）、视觉视口（Visual Viewport）和理想视口（Ideal Viewport）。
+
+##### 6.2.1 两种像素
+
+1. 物理像素
+   - 指的是设备屏幕的物理像素，任何设备的物理像素数量都是固定的。
+2. CSS 像素
+   - 是 CSS 和 JS 中使用的一个抽象概念。它和物理像素之间的比例取决于屏幕的特性（是否为高密度）以及用户进行的缩放，由浏览器自行换算。
+   - 在 Apple 的视网膜屏（Retina）中，每 4 个像素为一组，渲染出普通屏幕中一个像素显示区域内的图像，从而实现更为精细的显示效果。此时， 250px 的元素跨越了 500 个物理像素的宽度。
+
+![CSS像素](HTML&CSS_img/pixels.png)
+
+##### 6.2.2 布局视口(layout viewport)
+
+&emsp;一般移动设备的浏览器都默认设置了一个 viewport 元标签，定义一个虚拟的布局视口（layout viewport），用于解决早期的页面在手机上显示的问题。iOS, Android 基本都将这个视口分辨率设置为 980px，所以 PC 上的网页基本能在手机上呈现，只不过元素看上去很小，一般默认可以通过手动缩放网页。
+
+![layout viewport](HTML&CSS_img/layoutviewport.webp)
+
+##### 6.2.3 视觉视口(visual viewport)
+
+&emsp;视觉视口是用户当前看到的区域，用户可以通过缩放操作视觉视口，同时不会影响布局视口。
+
+![visual viewport](HTML&CSS_img/visualviewport.webp)
+
+##### 6.2.4 理想视口(idea viewport)
+
+&emsp;布局视口的宽度一般在 680~1024 像素之间，这样可以使得 PC 网站在手机中不被压扁，但是这并不理想，因为手机更适合窄的网站，换句话说，布局视口并不是最理想的宽度。  
+&emsp;理想视口，定义了理想视口的宽度，比如对于 iphone6 来讲，理想视口是 375\*667px。但是最终作用的还是布局视口，因为我们的 css 是依据布局视口计算的，所以可以这样理解理想视口：理想的布局视口。  
+&emsp;我们可以通过设置 Viewport 的 width= device-width 就可以将 Layout Viewport 的宽度设置为 Ideal Viewport 的宽度，还有通过设置 initial-scale=1.0 也同样可以实现效果，因为缩放是以 Ideal Viewport 作为参考的。  
+&emsp;要把当前的 viewport 宽度设为 ideal viewport 的宽度，既可以设置 width=device-width，也可以设置 initial-scale=1，但这两者各有一个小缺陷，就是 iphone、ipad 以及 IE 会横竖屏不分，通通以竖屏的 ideal viewport 宽度为准。所以，最完美的写法应该是，两者都写上去，这样就 initial-scale=1 解决了 iphone、ipad 的毛病，width=device-width 则解决了 IE 的毛病
+
+##### 6.2.5 meta 视口标签
+
+```html
+<!-- 标准设置 -->
+<!-- device-width - 设备的宽度 -->
+<!-- initial-scale - 初始的缩放比例   -->
+<!-- minimum-scale - 允许用户缩放到的最小比例    -->
+<!-- maximum-scale - 允许用户缩放到的最大比例   -->
+<!-- user-scalable - 用户是否可以手动缩放  -->
+<meta
+  name="viewport"
+  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0 "
+/>
+```
+
+#### 6.3 二倍图
