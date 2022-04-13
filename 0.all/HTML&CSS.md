@@ -1228,3 +1228,121 @@ transform: translate() rotate() scale();
 2. 同时有位移和其他属性时，将位移放在最前
 
 ### 四、CSS3 动画
+
+> 动画(animation)可以设置多个节点来精确控制一个或一组动画
+
+#### 4.1 使用 keyframes 定义动画
+
+&emsp;类似定义类选择器 -> 可以定义任意多的样式和任意多的次数
+
+```css
+@keyframes animation_name {
+  /* 动画的开始 */
+  0% {
+    width: 100px;
+  }
+  /* 动画的完成 */
+  100% {
+    width: 200px;
+  }
+}
+```
+
+#### 4.2 调用动画
+
+```css
+animation-name: 动画名称;
+animation-duration: 持续时间(s);
+```
+
+#### 4.3 动画序列
+
+&emsp;关键词：from(0%) to(100%)  
+&emsp;百分比：总的时间划分；需要为整数
+
+#### 4.4 动画常用属性
+
+|            属性             |                         说明                          |
+| :-------------------------: | :---------------------------------------------------: |
+|        `@keyframes`         |                       规定动画                        |
+|         `animation`         |    所有动画属性的简写属性(除 animation-play-state)    |
+|      `animation-name`       |                    规定名称(必需)                     |
+|    `animation-duration`     |             完成一个周期所需的时间(必需)              |
+| `animation-timing-function` |                 速度曲线，默认为 ease                 |
+|      `animation-delay`      |                 从何时开始，默认为 0                  |
+| `animation-iteration-count` |         被播放的次数，默认为 1，还有 infinite         |
+|    `animation-direction`    | 是否在下一周期逆向播放，默认为 normal，逆向 alternate |
+|   `animation-play-state`    |    是否正在运行或暂停，默认为 running，还有 paused    |
+|    `animation-fill-mode`    |    结束后的状态，保持 forwards，回到起始 backwords    |
+
+&emsp;简写：
+
+```css
+animation: animation-name animation-duration animation-timing-function animation-delay animation-iteration-count
+  animation-direction animation-fill-mode;
+```
+
+1. 简写属性不包括`animation-play-state`
+2. 暂停动画:`animation-play-state:paused;`，经常和鼠标经过一起配合
+3. 动画原路返回:`animation-direction:alternate;`
+4. `scale()`也会让阴影放大
+
+#### 4.5 速度曲线
+
+&emsp;`steps()` 指定了时间函数中的间隔数量(步长)
+
+### 五、3D 转换
+
+> x 轴水平向右，右为正  
+> y 轴竖直向下，下为正  
+> z 轴垂直于屏幕，往外为正
+
+#### 5.1 3D 移动(translate3D)
+
+```css
+/* 写法1 */
+/* x、y、z不能省略，没有写0 */
+transform: translate3d(x, y, z);
+/* 写法2 */
+/* 单位一般为px */
+transform: translateX();
+transform: translateY();
+transform: translateZ();
+```
+
+#### 5.2 透视(perspective)
+
+&emsp;指定观察者与[z=0]平面的距离，使具有三维位置变换的元素产生透视效果。[z>0] => 三维元素比正常的大；[z<0] => 三维元素比正常的小。 单位为 px。  
+&emsp;**透视写在被观察元素的父盒子上面**
+
+![perspective&translatez](HTML&CSS_img/perspective&translatez.png)
+
+1. d,视距 是指从当前视角(人眼)到所看平面(屏幕)的距离
+2. z,z 轴 指的是从所看平面到推进视角之间的距离，大白话就是从当前距离 把你看的拉进或者拉远的距离
+3. 人的视角在 3D 投影效果中是 近大远小
+
+#### 5.3 3D 旋转(rotate3d)
+
+```css
+/* 分别以x、y、z轴为旋转轴 */
+transform: rotateX(45deg);
+transform: rotateY(45deg);
+transform: rotateZ(45deg);
+/* x/y/z 为旋转轴的矢量 */
+transform: rotate3d(x, y, z, deg);
+```
+
+&emsp;**左手定则**：左手握旋，拇指指向 x/y/z 正方向(translate)，四指弯曲方向即为旋转的正方向(rotate)
+
+#### 5.4 3D 呈现(transform-style)
+
+&emsp;控制子元素是否开启三维立体环境
+
+```css
+/* 子元素不开启3D立体空间，默认值 */
+transform-style: left;
+/* 子元素开启3D立体空间 */
+transform-style: preserve-3d;
+```
+
+&emsp;代码写给父级，但是影响子元素
