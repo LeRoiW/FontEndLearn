@@ -1548,7 +1548,7 @@ a {
 
 1. `flex-wrap:nowrap`（默认）：不换行
    ![nowrap](HTML&CSS_img/advanced/flex-wrap-nowarp.png)
-2. `flex-wrap:wrap`：换行，第一行在上方。
+2. `flex-wrap:wrap`：换行，第一行在上方
    ![wrap](HTML&CSS_img/advanced/flex-wrap-warp.jpg)
 3. `flex-wrap:wrap-reverse`：换行，第一行在下方
    ![nowrap](HTML&CSS_img/advanced/flex-wrap-wrap-reverse.jpg)
