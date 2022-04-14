@@ -882,7 +882,7 @@ div {
 1. 经常用于设置图片或者表单(行内块元素)和文字垂直对齐
 
    ```css
-   vertical-align: baseline|top|middle|bottom;
+   vertical-align: baseline | top | middle | bottom;
    /* baseline:默认，放在父元素的基线上 */
    /* top:把元素顶端与行内最高元素的顶端对齐 */
    /* middle:把元素放在父元素的中部 */
@@ -1119,7 +1119,7 @@ input::placeholder {
 &emsp;可以通过`box-sizing`来指定盒模型
 
 - `box-sizing:content-box`盒子大小为`width+padding+border`(以前默认)
-- `box-sizing:border-box`盒子大小为`width`
+- `box-sizing:border-box`盒子大小为`width`(包含了 border、padding)
 
 #### 2.3 图片模糊
 
@@ -1393,8 +1393,11 @@ transform-style: preserve-3d;
 
 ##### 6.2.5 meta 视口标签
 
-> viewport 标签只对移动端浏览器有效，对 PC 端浏览器是无效的  
-> 当前缩放值 = 理想视口宽度 / 视觉视口宽度
+> viewport 标签只对移动端浏览器有效，对 PC 端浏览器是无效的
+
+```md
+当前缩放值 = 理想视口宽度 / 视觉视口宽度
+```
 
 ```html
 <!-- 标准设置 -->
@@ -1410,3 +1413,170 @@ transform-style: preserve-3d;
 ```
 
 #### 6.3 二倍图
+
+&emsp;图片在普通显示屏的电脑中打开是正常的，但假设在手机或 Retina 屏中打开，他们的屏幕物理分辨率更高，那么就相当于拿 4 个(或更多)物理像素来描绘 1 个电子像素。这等于拿一个放大镜去看图片，图片就会变得模糊。  
+&emsp;如果需要使用 50×50 CSS pixel 的图片时，放一张 100×100 的，将其缩小为 50×50
+
+#### 6.4 主流布局方案
+
+1. 单独制作
+   - 网址域名前加 m 可以打开
+   - 判断设备是不是 mobile => 跳到移动端
+2. 响应式
+   - 通过判断屏幕宽度来改变样式，以适应移动端
+   - 制作麻烦，有兼容性问题
+
+#### 6.5 其他
+
+##### 6.5.1 CSS 初始化
+
+`normalize.css`
+
+##### 6.5.2 特殊样式
+
+```css
+box-sizing: border-box;
+-webkit-box-sizing: border-box;
+/* 清除点击高亮 */
+-webkit-tap-hightlight-color: transparent;
+/* 加上此代码iOS才可以定义按钮、input的样式 */
+-webkit-appearance: none;
+/* 禁用长按弹出菜单 */
+img,
+a {
+  -webkit-touch-callout: none;
+}
+```
+
+##### 6.5.3 常见布局
+
+1. 流式布局(百分比布局)
+2. flex 弹性布局 ▲
+3. less+rem+媒体查询布局
+4. 混合布局
+
+&emsp;响应式布局
+
+1. 媒体查询
+2. bootstrap
+
+### 七、流式布局
+
+> 又称非固定像素布局/百分比布局  
+> 通过设置盒子的 width 为百分比来根据屏宽伸缩
+
+1. `max-width/height`最大宽度/高度；`min-width/height`最小宽度/高度
+2. 二倍精灵图
+   - 在 firework 里把精灵图等比缩放为原来的一半
+   - 之后根据大小测量坐标
+   - `background-size`也要写：精灵图原来宽度的一半
+3. 图片格式
+   - DPG：京东开发，可节省 50%的流量，全浏览器兼容
+   - Webp：谷歌开发，大小约为 2/3 JPEG
+
+### 八、Flex 布局
+
+> `flexible Box`的缩写，意为弹性布局，任何一个容器都可指定为 flex 布局。**为父盒子设置 flex 后**，子元素的 float、clear、vertical-align 都会失效  
+> 采用 Flex 布局的元素被称为 Flex 容器(flex container)，简称容器。它的所有子元素自动成为容器成员，称为 Flex 项目(flex item)，简称项目
+
+![flex container](HTML&CSS_img/flex-container.png)
+
+&emsp;容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`；交叉轴的开始位置叫做`cross start`，结束位置叫做`cross end`  
+&emsp;项目默认沿主轴排列。单个项目占据的主轴空间叫做`main size`，占据的交叉轴空间叫做`cross size`。
+
+#### 8.1 常见父项属性
+
+|       名称        |                说明                 |
+| :---------------: | :---------------------------------: |
+| `flex-direction`  |             ▲ 主轴方向              |
+| `justify-content` |         主轴子元素排列方式          |
+|    `flex-wrap`    |           子元素是否换行            |
+|  `align-content`  |   侧轴上的子元素的排列方式(多行)    |
+|   `align-items`   |   侧轴上的子元素的排列方式(单行)    |
+|    `flex-flow`    | 复合属性:`flex-direction+flex-wrap` |
+
+##### 8.1.1 flex-direction
+
+&emsp;决定主轴的方向(即项目[元素]的排列方向)
+
+```css
+.box {
+  flex-direction: row | row-reverse | column | column-reverse;
+}
+```
+
+![flex-direction](HTML&CSS_img/flex-direction.png)
+
+|     属性值     |               说明               |
+| :------------: | :------------------------------: |
+|      row       | 默认，主轴为水平方向，起点在左端 |
+|     column     |     主轴为水平方向，从上到下     |
+|  row-reverse   |     主轴为垂直方向，从右到左     |
+| column-reverse |     主轴为垂直方向，从下到上     |
+
+##### 8.1.2 justify-content
+
+&emsp;定义了项目在主轴上的对齐方式(前提是确定好了主轴)
+
+|    属性值     |          说明          |
+| :-----------: | :--------------------: |
+|  flex-start   |    默认，从头部开始    |
+|   flex-end    |       从尾部开始       |
+|    center     |     在主轴居中对齐     |
+| ▲space-around |      平分剩余空间      |
+| space-between | 先两边贴边，再平分空间 |
+
+##### 8.1.3 flex-wrap
+
+&emsp;默认情况下，项目都排列在一条轴线上(不换行)  
+&emsp;nowrap - 默认，不换行； &emsp; wrap - 换行
+
+##### 8.1.4 align-items
+
+|   属性值   |      说明      |
+| :--------: | :------------: |
+| flex-start | 默认，从上到下 |
+|  flex-end  |    从下到上    |
+|   center   |  挤在一起居中  |
+|  stretch   |      拉伸      |
+
+##### 8.1.5 align-content
+
+&emsp;只能用于子项出现换行的情况
+
+|    属性值     |            说明             |
+| :-----------: | :-------------------------: |
+|  flex-start   |   默认，侧轴头部开始排列    |
+|   flex-end    |      侧轴尾部开始排列       |
+|    center     |      侧轴中间开始排列       |
+| space-around  |    子项侧轴平分剩余空间     |
+| space-between | 侧轴两边分布再平分剩余空间  |
+|    stretch    | 设置子项元素 h 平分父元素 h |
+
+#### 8.2 子项属性(flex)
+
+&emsp;定义子项分配剩余空间，用 flex 来表示占多少份数
+
+```css
+.item {
+  /* default 0 */
+  flex: <number>;
+}
+```
+
+#### 8.3 align-self
+
+&emsp;控制子项自己在侧轴上的排列方式
+
+#### 8.4 order
+
+&emsp;定义项目的排列顺序，数值越小，排列顺序越靠前
+
+#### 8.5 背景线性渐变
+
+> 必须添加浏览器私有前缀
+
+```css
+/* background: linear-gradient(起始方向, 颜色1, 颜色2, ……); */
+background: -webkit-linear-gradient(left, red, blue);
+```
