@@ -496,7 +496,7 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
 
 > 本质：HTML 页面中的元素，封装周围的 HTML 元素，包括边框、外边距、内边距和实际内容
 
-![盒模型](HTML&CSS_img/box-model.gif)
+![盒模型](HTML&CSS_img/normal/box-model.gif)
 
 #### 10.2 边框(border)
 
@@ -533,7 +533,7 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
 3. 如果盒子本身没有指定 width/height 属性，则此时的 padding 不会撑开盒子
 
 &emsp;**技巧**：不设置块(行内块)的 width，而是通过 padding 使各块的内边距相同  
-![padding技巧](HTML&CSS_img/10-1.png)
+![padding技巧](HTML&CSS_img/normal/10-1.png)
 
 #### 10.4 外边距(margin)
 
@@ -552,7 +552,7 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
      - 上下两个相邻的块元素，如果上边的块有 margin-bottom，下面的元素有 margin-top，则它们的垂直间距为 MAX{margin-top,margin-bottom}
      - 解决方法：尽量只给一个盒子添加 margin 值
 
-   ![合并](HTML&CSS_img/10-2.png)
+   ![合并](HTML&CSS_img/normal/10-2.png)
 
    - 嵌套块元素垂直外边距塌陷
      - 对于两个嵌套关系的块元素，父元素有上边距的同时子元素也有，此时父元素会塌陷较大的外边距值
@@ -561,7 +561,7 @@ body{ font:12px/1.5 "Microsoft YaHei"; }
        2. 为父元素定义 padding-top
        3. ▲ 为父元素添加 overflow:hidden
 
-   ![外边距塌陷](HTML&CSS_img/10-3.png)
+   ![外边距塌陷](HTML&CSS_img/normal/10-3.png)
 
 #### 10.5 清除网页元素(浏览器默认)内外边距
 
@@ -865,7 +865,7 @@ div {
 }
 ```
 
-![CSS三角](HTML&CSS_img/15-1.png)
+![CSS三角](HTML&CSS_img/normal/15-1.png)
 
 #### 15.5 界面样式
 
@@ -931,7 +931,7 @@ div {
 3. 行内块制作页码
 4. 三角强化
 
-![三角强化](HTML&CSS_img/15-2.png)
+![三角强化](HTML&CSS_img/normal/15-2.png)
 
 ```html
 <div class="price">
@@ -1145,7 +1145,7 @@ transition: 要过渡的属性 花费时间 运动曲线 延迟触发时间;
 /* 延迟触发时间:单位s，默认为0 */
 ```
 
-![运动曲线](HTML&CSS_img/transition.png)
+![运动曲线](HTML&CSS_img/advanced/transition.png)
 
 #### 2.6 网站 favicon 图标
 
@@ -1315,7 +1315,7 @@ transform: translateZ();
 &emsp;指定观察者与[z=0]平面的距离，使具有三维位置变换的元素产生透视效果。[z>0] => 三维元素比正常的大；[z<0] => 三维元素比正常的小。 单位为 px。  
 &emsp;**透视写在被观察元素的父盒子上面**
 
-![perspective&translatez](HTML&CSS_img/perspective&translatez.png)
+![perspective&translatez](HTML&CSS_img/advanced/perspective&translatez.png)
 
 1. d,视距 -> 是指从当前视角(人眼)到所看平面(屏幕)的距离
 2. z,z 轴 -> 指的是从所看平面到推进视角之间的距离，大白话就是从当前距离 把你看的拉进或者拉远的距离
@@ -1370,19 +1370,19 @@ transform-style: preserve-3d;
    - 是 CSS 和 JS 中使用的一个抽象概念。它和物理像素之间的比例取决于屏幕的特性（是否为高密度）以及用户进行的缩放，由浏览器自行换算。
    - 在 Apple 的视网膜屏（Retina）中，每 4 个像素为一组，渲染出普通屏幕中一个像素显示区域内的图像，从而实现更为精细的显示效果。此时， 250px 的元素跨越了 500 个物理像素的宽度。
 
-![CSS像素](HTML&CSS_img/pixels.png)
+![CSS像素](HTML&CSS_img/advanced/pixels.png)
 
 ##### 6.2.2 布局视口(layout viewport)
 
 &emsp;一般移动设备的浏览器都默认设置了一个 viewport 元标签，定义一个虚拟的布局视口（layout viewport），用于解决早期的页面在手机上显示的问题。iOS, Android 基本都将这个视口分辨率设置为 980px，所以 PC 上的网页基本能在手机上呈现，只不过元素看上去很小，一般默认可以通过手动缩放网页。
 
-![layout viewport](HTML&CSS_img/layoutviewport.webp)
+![layout viewport](HTML&CSS_img/advanced/layoutviewport.webp)
 
 ##### 6.2.3 视觉视口(visual viewport)
 
 &emsp;视觉视口是用户当前看到的区域，用户可以通过缩放操作视觉视口，同时不会影响布局视口。
 
-![visual viewport](HTML&CSS_img/visualviewport.webp)
+![visual viewport](HTML&CSS_img/advanced/visualviewport.webp)
 
 ##### 6.2.4 理想视口(idea viewport)
 
@@ -1479,10 +1479,10 @@ a {
 > `flexible Box`的缩写，意为弹性布局，任何一个容器都可指定为 flex 布局。**为父盒子设置 flex 后**，子元素的 float、clear、vertical-align 都会失效  
 > 采用 Flex 布局的元素被称为 Flex 容器(flex container)，简称容器。它的所有子元素自动成为容器成员，称为 Flex 项目(flex item)，简称项目
 
-![flex container](HTML&CSS_img/flex-container.png)
+![flex container](HTML&CSS_img/advanced/flex-container.png)
 
-&emsp;容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`；交叉轴的开始位置叫做`cross start`，结束位置叫做`cross end`  
-&emsp;项目默认沿主轴排列。单个项目占据的主轴空间叫做`main size`，占据的交叉轴空间叫做`cross size`。
+&emsp;容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`；侧轴(交叉轴)的开始位置叫做`cross start`，结束位置叫做`cross end`  
+&emsp;项目默认沿主轴排列。单个项目占据的主轴空间叫做`main size`，占据的侧轴(交叉轴)空间叫做`cross size`。
 
 #### 8.1 常见父项属性
 
@@ -1505,7 +1505,7 @@ a {
 }
 ```
 
-![flex-direction](HTML&CSS_img/flex-direction.png)
+![flex-direction](HTML&CSS_img/advanced/flex-direction.png)
 
 |     属性值     |               说明               |
 | :------------: | :------------------------------: |
@@ -1516,63 +1516,168 @@ a {
 
 ##### 8.1.2 justify-content
 
-&emsp;定义了项目在主轴上的对齐方式(前提是确定好了主轴)
+&emsp;定义了项目在**主轴**上的对齐方式(前提是确定好了主轴)
 
-|    属性值     |          说明          |
-| :-----------: | :--------------------: |
-|  flex-start   |    默认，从头部开始    |
-|   flex-end    |       从尾部开始       |
-|    center     |     在主轴居中对齐     |
-| ▲space-around |      平分剩余空间      |
-| space-between | 先两边贴边，再平分空间 |
+```css
+.box {
+  justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+```
+
+![justify-content](HTML&CSS_img/advanced/flex-justify-content.png)
+
+|    属性值     |                         说明                         |
+| :-----------: | :--------------------------------------------------: |
+|  flex-start   |                   默认，从头部开始                   |
+|   flex-end    |                      从尾部开始                      |
+|    center     |                    在主轴居中对齐                    |
+| space-between |                先两边贴边，再平分空间                |
+| ▲space-around | 平分剩余空间(项目之间的间隔比项目与边框的间隔大一倍) |
 
 ##### 8.1.3 flex-wrap
 
-&emsp;默认情况下，项目都排列在一条轴线上(不换行)  
-&emsp;nowrap - 默认，不换行； &emsp; wrap - 换行
+&emsp;默认情况下，项目都排在一条线（又称"轴线"）上。flex-wrap 属性定义，如果一条轴线排不下，如何换行
+
+![flex-wrap](HTML&CSS_img/advanced/flex-wrap.png)
+
+```css
+.box {
+  flex-wrap: nowrap | wrap | wrap-reverse;
+}
+```
+
+1. `flex-wrap:nowrap`（默认）：不换行
+   ![nowrap](HTML&CSS_img/advanced/flex-wrap-nowarp.png)
+2. `flex-wrap:wrap`：换行，第一行在上方。
+   ![wrap](HTML&CSS_img/advanced/flex-wrap-warp.jpg)
+3. `flex-wrap:wrap-reverse`：换行，第一行在下方
+   ![nowrap](HTML&CSS_img/advanced/flex-wrap-wrap-reverse.jpg)
 
 ##### 8.1.4 align-items
 
-|   属性值   |      说明      |
-| :--------: | :------------: |
-| flex-start | 默认，从上到下 |
-|  flex-end  |    从下到上    |
-|   center   |  挤在一起居中  |
-|  stretch   |      拉伸      |
+&emsp;定义**单行**项目在交叉轴上如何对齐
+
+```css
+.box {
+  align-items: flex-start | flex-end | center | baseline | stretch;
+}
+```
+
+![align-items](HTML&CSS_img/advanced/flex-align-items.png)
+
+|   属性值   |                        说明                         |
+| :--------: | :-------------------------------------------------: |
+| flex-start |                   侧轴的起点对齐                    |
+|  flex-end  |                   侧轴的终点对齐                    |
+|   center   |                   侧轴的中点对齐                    |
+|  baseline  |             项目的第一行文字的基线对齐              |
+|  stretch   | 如果项目未设置高度或设为 auto，将占满整个容器的高度 |
 
 ##### 8.1.5 align-content
 
-&emsp;只能用于子项出现换行的情况
+&emsp;定义了**多行项目**的对齐方式。如果项目只有一根轴线，该属性不起作用(只能用于子项出现换行的情况)
 
-|    属性值     |            说明             |
-| :-----------: | :-------------------------: |
-|  flex-start   |   默认，侧轴头部开始排列    |
-|   flex-end    |      侧轴尾部开始排列       |
-|    center     |      侧轴中间开始排列       |
-| space-around  |    子项侧轴平分剩余空间     |
-| space-between | 侧轴两边分布再平分剩余空间  |
-|    stretch    | 设置子项元素 h 平分父元素 h |
+```css
+.box {
+  align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+}
+```
 
-#### 8.2 子项属性(flex)
+![align-content](HTML&CSS_img/advanced/flex-align-content.png)
 
-&emsp;定义子项分配剩余空间，用 flex 来表示占多少份数
+|    属性值     |               说明                |
+| :-----------: | :-------------------------------: |
+|  flex-start   |         侧轴头部开始排列          |
+|   flex-end    |         侧轴尾部开始排列          |
+|    center     |         侧轴中间开始排列          |
+|    stretch    | 默认，设置子项元素 h 平分父元素 h |
+| space-between |    侧轴两边分布再平分剩余空间     |
+| space-around  |       子项侧轴平分剩余空间        |
+
+#### 8.2 子项属性
+
+##### 8.2.1 flex
+
+&emsp;定义子项分配剩余空间，用 flex 来表示占多少份数  
+&emsp;是`flex-grow`,`flex-shrink`和`flex-basis`的简写，默认值为`0 1 auto`。后两个属性可选。
 
 ```css
 .item {
+  flex: none | [ < 'flex-grow' > < 'flex-shrink' >? || 'flex-basis' > ];
   /* default 0 */
   flex: <number>;
 }
 ```
 
-#### 8.3 align-self
+&emsp;该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值
 
-&emsp;控制子项自己在侧轴上的排列方式
+##### 8.2.2 align-self
 
-#### 8.4 order
+&emsp;允许单个项目有与其他项目不一样的对齐方式，可覆盖`align-items`属性。默认值为`auto`，表示继承父元素的`align-items`属性，如果没有父元素，则等同于`stretch`
 
-&emsp;定义项目的排列顺序，数值越小，排列顺序越靠前
+```css
+.item {
+  align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+```
 
-#### 8.5 背景线性渐变
+![align-self](HTML&CSS_img/advanced/flex-align-self.png)
+
+##### 8.2.3 order
+
+&emsp;属性定义项目的排列顺序。数值越小，排列越靠前，默认为 0
+
+```css
+.item {
+  order: <integer>;
+}
+```
+
+![order](HTML&CSS_img/advanced/flex-order.png)
+
+##### 8.2.4 flex-grow
+
+&emsp;定义项目的放大比例，默认为 0，即如果存在剩余空间，也不放大
+
+```css
+.item {
+  /* default 0 */
+  flex-grow: <number>;
+}
+```
+
+&emsp;如果所有项目的 `flex-grow` 属性都为 1，则它们将等分剩余空间（如果有的话）。如果一个项目的 `flex-grow` 属性为 2，其他项目都为 1，则前者占据的剩余空间将比其他项多一倍
+
+![flex-grow](HTML&CSS_img/advanced/flex-grow.png)
+
+##### 8.2.5 flex-shrink
+
+&emsp;定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小
+
+```css
+.item {
+  /* default 1 */
+  flex-shrink: <number>;
+}
+```
+
+&emsp;如果所有项目的`flex-shrink`属性都为 1，当空间不足时，都将等比例缩小。如果一个项目的`flex-shrink`属性为 0，其他项目都为 1，则空间不足时，前者不缩小。负值对该属性无效
+
+![flex-shrink](HTML&CSS_img/advanced/flex-shrink.jpg)
+
+##### 8.2.6 flex-basis
+
+&emsp;定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为 auto，即项目的本来大小。  
+&emsp;可以设为跟 width 或 height 属性一样的值（比如 350px），则项目将占据固定空间
+
+```css
+.item {
+  /* default auto */
+  flex-basis: <length> | auto;
+}
+```
+
+#### 8.3 背景线性渐变
 
 > 必须添加浏览器私有前缀
 
