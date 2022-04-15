@@ -1690,3 +1690,205 @@ a {
 /* background: linear-gradient(起始方向, 颜色1, 颜色2, ……); */
 background: -webkit-linear-gradient(left, red, blue);
 ```
+
+### 九、rem 适配布局
+
+#### 9.1 rem 基础
+
+&emsp;root em，相对单位，基准是相对于 html 元素的字体大小
+
+#### 9.2 媒体查询(Media Query)
+
+&emsp;可以针对不同的媒体类型\&屏幕尺寸定义不同的样式
+
+1. 语法规范
+
+   ```css
+   @media mediatype and | not | only (media feature){
+       css-code;
+   }
+   /* mediatype：媒体类型 */
+   /* and|not|only：关键字 */
+   /* media feature：媒体特性，必须要小括号 */
+   ```
+
+   - `media type`：all 所有；print 打印机&预览；screen：屏幕
+   - `media feature`
+     - width：定义输出设备中页面可视区域的宽度
+     - min-width：定义输出设备中最小页面可视区域的宽度(包含等于)
+     - max-width：定义输出设备中最大页面可视区域的宽度(包含等于)
+     - 建议从小到大写
+
+2. 引入资源
+
+&emsp;直接在 link 中判断尺寸，引用 css 以达到针对不同媒体使用不同 stylesheets 的目的
+
+```html
+<link rel="stylesheet" media="mediatype and|not|only (media feature)" herf="mystylesheet.css" />
+```
+
+### 十、Less 基础(Leaner Style Sheets)
+
+&emsp;CSS 扩展语言，CSS 预处理器  
+&emsp;将 common.less 引入到 index.less -> `@inport "common"`
+
+#### 10.1 less 变量
+
+```less
+// @变量名:值;
+// main.less
+@color: red;
+body {
+  background: @color;
+}
+```
+
+#### 10.2 less 编译
+
+> VScode：Easy less 插件
+
+#### 10.3 less 嵌套
+
+```less
+// 将子元素直接写在父元素内即可
+#header {
+  h1 {
+    font-size: 26px;
+  }
+  p {
+    font-size: 12px;
+    a {
+      text-decoration: none;
+      // 内层选择器前如果有'&' 则被解析为父元素自身或其伪类
+      &:hover {
+        border-width: 1px;
+      }
+    }
+  }
+}
+```
+
+```css
+/* 编译后的CSS文件 */
+#header h1 {
+  font-size: 26px;
+}
+#header p {
+  font-size: 12px;
+}
+#header p a {
+  text-decoration: none;
+}
+#header p a:hover {
+  border-width: 1px;
+}
+```
+
+#### 10.4 less 运算
+
+```less
+// 任何数字、颜色、变量都可以参与，提供了+、-、*、/
+// 运算符左右各有一个空格，单位以第一个为准
+@the-border: 1px;
+@base-color: #111;
+@red: #842210;
+#header {
+  color: @base-color * 3;
+  border-left: @the-border;
+  border-right: @the-border * 2;
+}
+#footer {
+  color: @base-color + #003300;
+  border-color: desaturate(@red, 10%);
+}
+```
+
+```css
+/* 编译后的CSS */
+#header {
+  color: #333;
+  border-left: 1px;
+  border-right: 2px;
+}
+#footer {
+  color: #114411;
+  border-color: #7d2717;
+}
+```
+
+#### 10.5 rem 适配方案 1
+
+> less+媒体查询+rem
+
+&emsp;元素大小取值方法：
+
+1. 公式：页面元素的 rem=页面元素值(px)/(屏宽/份数)
+2. 屏宽/份数 就是`html.font-size`的大小
+3. or: 页面元素的 rem=页面元素值(px)/`html.font-size`
+
+#### 10.6 rem 适配方案 2
+
+> flexible.js(根据不同屏宽设定不同 rem)+rem
+
+1. 手淘出品的移动端适配库
+2. 实际的 px=设计稿对应的 rem\*获取的 1rem 对应 px
+
+> PS:  
+> &emsp;在`flexible.js`中定义*份数*，再根据*设计稿的屏宽*算出*设计稿中 1rem 对应的 px(html.font-size)*;
+>
+> &emsp;在*css/rem 转化插件*中定义这个*html.font-size*，此时写代码时直接使用*设计稿的 px*会转化成对应的 rem；
+>
+> &emsp;显示时，**元素的 rem 不变**，**份数不变**，但是由于**实际的屏宽会变**，所以**实际 1rem 代表的 px 变化** => **实际的字号变化**，实现适配
+>
+> > ▲ 插件中设置的`html.font-size`依据份数和设计稿宽度，只影响代码书写时的 rem
+
+### 十一、响应式布局
+
+> 使用媒体查询针对不同宽度的设备进行布局和样式的设置
+
+#### 11.1 响应式布局容器
+
+&emsp;需要一个父级做布局容器，来配合子元素实现变化效果。在不同屏幕下通过`Media Query`来改变容器大小，再改变子元素的排列方式和大小，实现变化
+
+#### 11.2 Bootstrap
+
+&emsp;框架：一套架构。有比较完整的网页功能解决方案，且控制权在框架本身，有预制样式库、组件和插件
+
+##### 11.2.1 .container 容器
+
+&emsp;`Bootstrap`提供了一个`.container`容器
+
+1. `.container`类 => 预定义了响应式布局的容器，有 15px 左右的 padding
+2. `container-fluid`类 => 流式布局容器(100%宽，占据全部 viewport)
+
+##### 11.2.2 栅格系统(grid systems)
+
+&emsp;将页面布局划分为等宽的列，然后通过列数的定义来模块化页面布局
+&emsp;Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，系统会自动分成最多 12 列 => 划分 container
+
+1. 栅格选项参数
+
+   |       屏幕尺寸       |     <768px     |   ≥768px   |   ≥992px   |  ≥1200px   |
+   | :------------------: | :------------: | :--------: | :--------: | :--------: |
+   | `.container`最大宽度 |   auto(100%)   |   750px    |   970px    |   1170px   |
+   |        类前缀        | `.col-xs-份数` | `.col-sm-` | `.col-md-` | `.col-lg-` |
+   |     列(column)数     |       12       |     12     |     12     |     12     |
+
+   - Note：
+     - 行(row)必须放到`container`布局容器内
+     - 实现`column`的平均划分，需要经列添加类前缀
+     - `column>12`，多余的将被作为一个整体另起一行排列
+     - 每一列默认有 15px 的 padding
+     - 可同时为一列指定多个设备的类名
+     - 列于列之间的空隙使用 padding 添加，margin 会使盒子变宽
+
+2. 列嵌套
+   - 最好选择`col-row-col`的方式进行列嵌套，可以取消父元素的 padding 值
+3. 列偏移
+   - `.col-md-offset-*`类可以将列向右偏移，实际是用\*构造器为当前元素增加了左侧的边距(margin)
+4. 列排序
+   - `.col-md-push-*` -> 左往右推
+   - `.col-md-pull-*` <- 右往左推
+5. 隐藏工具
+   - 类名：`.hidden-xs` `.hidden-sm` `.hidden-md` `.hidden-lg`
+   - 显示工具：`.visible-xs` `.visible-sm` `.visible-md` `.visible-lg`
