@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+body {
+  overflow: hidden;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif;
+  font-size: 16px;
+  color: #dedee0;
+  line-height: 1.75;
+}
+body .w {
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+}
+body .w .main {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  width: 100%;
+  align-items: center;
+}
+body .w .main .menu_tab {
+  flex: 1;
+  height: 60px;
+  line-height: 60px;
+  font-size: 14px;
+  background-color: #3f404b;
+  border-bottom: solid 1px #e6e6e6;
+}
+body .w .main .menu_tab li {
+  float: left;
+  padding: 0 20px;
+  height: 100%;
+  box-sizing: border-box;
+}
+body .w .main .menu_tab li img {
+  vertical-align: middle;
+  height: 37.08px;
+}
+body .w .main .menu_tab .menu_picked {
+  border-bottom: 2px solid #f2c260;
+  color: #fff;
+}
