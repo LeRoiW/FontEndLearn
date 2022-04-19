@@ -12,6 +12,7 @@ body {
   font-size: 16px;
   color: #dedee0;
   line-height: 1.75;
+  background: #242632;
 }
 body .w {
   position: absolute;
@@ -52,4 +53,51 @@ body .w .main .menu_tab li img {
 body .w .main .menu_tab .menu_picked {
   border-bottom: 2px solid #f2c260;
   color: #fff;
+}
+body .w .main .pre_view {
+  width: 100%;
+  height: 1019px;
+}
+body .w .main .pre_view .pre_common {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body .w .main .pre_view .view_window {
+  width: 83%;
+  height: 100%;
+}
+body .w .main .pre_view .view_window p {
+  color: #f2c260;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+body .w .main .pre_view .view_window .player {
+  width: 100%;
+  height: 800px;
+  background: #000000;
+  border: 2px solid #f2c260;
+  overflow: hidden;
+  position: relative;
+}
+body .w .main .pre_view .daobo_switch {
+  width: 16%;
+  height: 100%;
+  background-color: blueviolet;
+}
+body .w .main .pre_view .daobo_switch .switch {
+  min-width: 61.8%;
+  display: inline-block;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  height: 20px;
+  vertical-align: middle;
 }
