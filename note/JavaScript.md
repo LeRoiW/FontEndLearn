@@ -93,7 +93,7 @@
    - -Infinity -> 代表无穷小，小于任何数值
    - NaN -> Not a number，代表一个非数值
 3. isNaN()
-   - 用来判断一个变量是否为非数字的类型，返回 true 或者 false
+   - 用来判断一个变量是否为非数字的类型，返回 true 或者 false  
      ![isNaN](JavaScript_img/Part1/figure3-1.png)
 
 ##### 3.2.2 String
