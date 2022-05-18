@@ -1,3 +1,11 @@
-# learn_html
+# Front End 新手村
 
-## 这是一个 HTML&CSS 学习的私有库
+---
+
+[HTML&CSS 笔记](note/HTML%26CSS.md)
+
+[JavaScript 笔记](note/JavaScript.md)
+
+> 前端学习(跟随黑马视频课)
+
+---
