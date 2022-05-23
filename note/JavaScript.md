@@ -4,7 +4,7 @@
 
 ---
 
-## Part 1 基础部分
+## Part Ⅰ 基础部分
 
 ### 一、初识 JavaScript
 
@@ -752,3 +752,14 @@ Math.max() / Math.min(); // 求最大和最小值
    ![figure12-2](JavaScript_img/Part1/figure12-2.jpg)
 
 ---
+
+## Part Ⅱ Web API
+
+### 一、Web API
+
+&emsp;API(Application Programming Interface,应用程序编程接口)
+&emsp;Web API：浏览器提供的一套浏览器功能和页面元素的 API(DOM/BOM)
+
+---
+
+## Part Ⅳ 附录
