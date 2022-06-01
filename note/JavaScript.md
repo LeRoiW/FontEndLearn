@@ -1375,8 +1375,344 @@ eventTarget.addEventListener('click', function (event) {});
 
 ---
 
-## Part Ⅲ
+## Part Ⅲ jQuery
+
+### 一、jQuery
+
+&emsp;JavaScript 库：即 library，是一个封装好的特定的集合（方法和函数）。比如 jQuery，就是为了快速方便的操作 DOM，里面基本都是函数（方法）。
+
+1. jQuery 入口函数
+
+   ```javascript
+   $(function () {
+       ...  // 此处是页面 DOM 加载完成的入口
+   }) ;
+
+   $(document).ready(function(){
+   ...  //  此处是页面DOM加载完成的入口
+   });
+   ```
+
+   - 等着 DOM 结构渲染完毕即可执行内部代码，不必等到所有外部资源加载完成，jQuery 帮我们完成了封装。
+   - 相当于原生 js 中的 DOMContentLoaded。
+   - 不同于原生 js 中的 load 事件是等页面文档、外部的 js 文件、css 文件、图片加载完毕才执行内部代码。
+
+2. 顶级对象 $
+   - \$ 是 jQuery 的别称，在代码中可以使用 jQuery 代替 \$，但一般为了方便，通常都直接使用 \$ 。
+   - \$ 是 jQuery 的顶级对象，相当于原生 JavaScript 中的 window。把元素利用\$包装成 jQuery 对象，就可以调用 jQuery 的方法。
+3. jQuery 对象和 DOM 对象
+   - 用原生 JS 获取来的对象就是 DOM 对象
+   - jQuery 方法获取的元素就是 jQuery 对象。
+   - jQuery 对象本质是：利用\$对 DOM 对象包装后产生的对象（伪数组形式存储）。
+4. 相互转换
+   - DOM 对象转换为 jQuery 对象：`$('div')`
+   - jQuery 对象转换为 DOM 对象：`$('div')[index]`、`$('div').get(index)`
+
+### 二、jQuery 选择器
+
+1. jQuery 基础&层级选择器
+
+   ```javascript
+    $(“选择器”)   //  里面选择器直接写 CSS 选择器即可，但是要加引号
+   ```
+
+   |    名称    |       用法        |                 描述                 |
+   | :--------: | :---------------: | :----------------------------------: |
+   | ID 选择器  |    `$("#id")`     |          获取指定 ID 的元素          |
+   | 全选选择器 |     `$("*")`      |             匹配所有元素             |
+   |  类选择器  |   `$(".class")`   |        获取同一类 class 元素         |
+   | 标签选择器 |    `$("div")`     |        获取同一标签的所有元素        |
+   | 并集选择器 |  `$("div,p,li")`  |             选取多个元素             |
+   | 交集选择器 | `$("li.current")` |               交集元素               |
+   | 子代选择器 |   `$("ul>li")`    | 获取直接子元素(亲儿子，不会获取孙子) |
+   | 后代选择器 |   `$("ul li")`    |     获取所有相应标签的后代子元素     |
+
+2. **隐式迭代**：遍历内部 DOM 元素（伪数组形式存储）的过程就叫做隐式迭代。
+3. 筛选选择器
+
+   |     语句     |      用法       |                            描述                            |
+   | :----------: | :-------------: | :--------------------------------------------------------: |
+   |   `:first`   | `$('li:first')` |                     获取第一个 li 元素                     |
+   |   `:last`    | `$('li:last')`  |                    获取最后一个 li 元素                    |
+   | `:eq(index)` | `$('li:eq(2)')` | 获取到的 li 元素中，选择索引号为 2 的元素，索引号从 0 开始 |
+   |    `:odd`    |  `$('li:odd')`  |         获取到的 li 元素中，选择索引号为奇数的元素         |
+   |   `:even`    | `$('li:even')`  |         获取到的 li 元素中，选择索引号为偶数的元素         |
+
+4. 筛选方法
+
+   |         语法         |               用法                |                   说明                    |
+   | :------------------: | :-------------------------------: | :---------------------------------------: |
+   |      `parent()`      |        `$('li').parent();`        |            查找父级(最近一级)             |
+   | `children(selector)` |     `$('ul').children('li');`     |            相当于`$("ul>li")`             |
+   |   `find(selector)`   |       `$('ul').find('li');`       |            相当于`$("ul li")`             |
+   | `siblings(selector)` |   `$('.first').siblings('li');`   |       查找兄弟节点，不包括自己本身        |
+   |  `nextAll([expr])`   |     `$('.first').nextAll();`      |      查找当前元素之后所有的同辈元素       |
+   |  `prevAll([expr])`   |      `$('.last').prevAll();`      |      查找当前元素之前所有的同辈元素       |
+   |  `hasClass(class)`   | `$('div').hasClass('protected');` | 检查是否存在某个特定的类，存在则返回 true |
+   |     `eq(index)`      |         `$('li').eq(2);`          |           相当于`$('li:eq(2)')`           |
+
+   - 排他思想
+
+     ```javascript
+     $(this).css(“color”,”red”);
+     $(this).siblings(). css(“color”,””);
+     ```
+
+   - 得到当前元素索引号：`$(this).index()`
+
+5. 链式编程：`$(this).css('color','red').sibling().css('color','');`
+
+### 三、样式操作
+
+1. 操作 CSS 方法
+
+   ```javascript
+   // 参数只写**属性名**，则是返回属性值：
+   $(this).css('color');
+   // 参数是 属性名，属性值，是设置一组样式，属性必须加引号，值如果是数字可以不用跟单位和引号：
+   $(this).css('color', 'red');
+   // 参数可以是对象形式设置多组样式。属性名和属性值用冒号隔开，属性可以不用加引号：
+   $(this).css({ color: 'white', 'font-size': '20px' });
+   ```
+
+2. 设置类样式方法
+
+   ```javascript
+   // 添加类：
+   $("div").addClass("current");
+   // 移除类：
+   $(“div”).removeClass("current");
+   // 切换类：
+   $(“div”).toggleClass("current");
+   ```
+
+3. 类操作与 className 的区别
+   - 原生 JS 中 className 会覆盖元素原先里面的类名。
+   - jQuery 里面类操作只是对指定类进行操作，不影响原先的类名。
+
+### 四、效果
+
+1. 封装动画效果
+
+   ![封装动画](JavaScript_img/Part3/figure4-1.png)
+
+2. 显示隐藏
+
+   ```javascript
+   show([speed, [easing], [fn]]);
+   hide([speed, [easing], [fn]]);
+   toggle([speed, [easing], [fn]]);
+   // 参数都可以省略，无动画直接显示
+   // speed：三种预定速度之一的字符串(“slow”,“normal”,or “fast”)或表示动画时长的毫秒数值(如：1000)
+   // easing：(Optional) 用来指定切换效果，默认是“swing”
+   // fn：回调函数，在动画完成时执行的函数，每个元素执行一次。
+   ```
+
+3. 滑动效果
+
+   ```javascript
+   // 参数同显示隐藏
+   slideDown([speed, [easing], [fn]]);
+   slideUp([speed, [easing], [fn]]);
+   slideToggle([speed, [easing], [fn]]);
+   ```
+
+4. 事件切换
+
+   ```javascript
+   hover([over,]out);
+   // over：鼠标移到元素上要触发的函数（相当于 mouseenter）
+   // out：鼠标移出元素要触发的函数（相当于 mouseleave）
+   // 如果只写一个函数，则鼠标经过和离开都会触发它
+   ```
+
+5. 动画队列及其停止排队方法
+
+   - **动画或效果队列**：动画或者效果一旦触发就会执行，如果多次触发，就造成多个动画或者效果排队执行
+   - 停止排队：`stop();`，写到动画或者效果的**前面**，**相当于停止结束上一次的动画**
+
+6. 淡入淡出效果
+
+   ```javascript
+   // 参数同显示隐藏
+   fadeIn([speed, [easing], [fn]]);
+   fadeOut([speed, [easing], [fn]]);
+   fadeToggle([speed, [easing], [fn]]);
+   // 渐进方式调整到指定的不透明度
+   fadeTo([[speed], opacity, [easing], [fn]]);
+   // 其中，opacity 必须写，取值0~1；speed 必须写
+   ```
+
+7. 自定义动画
+   - `animate(params,[speed],[easing],[fn]);`
+   - params: 想要更改的样式属性，以对象形式传递，必须写。属性名可以不用带引号，如果是复合属性则需要采取驼峰命名法 borderLeft。其余参数都可以省略，如不省略则同显示隐藏
+
+### 五、属性、文本操作
+
+1. 设置或获取元素固有属性值 prop()
+   - 获取属性语法：`prop("属性")`
+   - 设置属性语法：`prop("属性","属性值")`
+2. 设置或获取元素自定义属性值 attr()
+   - 获取属性语法：`attr("属性")`
+   - 设置属性语法：`attr("属性","属性值")`
+   - 类似原生 getAttribute()/setAttribute()
+3. 数据缓存 data()
+   - data() 方法可以在指定的元素上存取数据，并不会修改 DOM 元素结构。一旦页面刷新，之前存放的数据都将被移除
+   - 附加数据语法：`data("name","value")`
+   - 获取数据语法：`data("name")` (可以通过 index 读取 HTML5 自定义属性 data-index ，得到的是数字型)
+4. 普通元素内容 html() (相当于原生 innerHTML)
+   - 获取元素的内容：`html()`
+   - 设置元素的内容：`html("内容")`
+5. 普通元素文本内容 text() (相当与原生 innerText)
+   - 获取元素的文本内容：`text()`
+   - 设置元素的文本内容：`text("文本内容")`
+6. 表单的值 val() (相当于原生 value)
+   - 获取表单的值：`val()`
+   - 设置表单的值：`val("内容")`
+
+### 六、元素、尺寸、位置操作
+
+1. 遍历元素
+
+   - jQuery 隐式迭代是对同一类元素做了同样的操作。 如果想要给同一类元素做不同操作，就需要用到遍历
+
+   ```javascript
+   $('div').each(function (index, domEle) {});
+   // each() 方法遍历匹配的每一个元素。主要用 DOM 处理。
+   // 回调函数的参数：index 是每个元素的索引号；demEle 是每个 DOM 元素对象，不是 jQuery 对象
+   // 所以要想使用 jQuery 方法，需要给这个 dom 元素转换为 jQuery 对象 `$(domEle)`
+   $.each(object, function (index, element) {});
+   // $.each()方法可用于遍历任何对象。主要用于数据处理，比如数组，对象
+   // 回调函数的参数：index 是每个元素的索引号；element 遍历内容
+   ```
+
+2. 创建元素
+   - `$("标签")`
+3. 添加元素
+
+   ```javascript
+   // 内部添加(父子关系)
+   // 把内容放在匹配元素内部最后面,类似于原生 appendChild：
+   element.append('内容');
+   // 把内容放在匹配元素内部最前面：
+   element.prepend('内容');
+   // 外部添加(兄弟关系)
+   // 把内容放在目标元素后面：
+   element.after('内容');
+   // 把内容放在目标元素前面：
+   element.before('内容');
+   ```
+
+4. 删除元素
+
+   ```javascript
+   // 删除匹配的元素(**本身**)：
+   element.remove();
+   // 删除匹配的元素集合中所有的子节点：
+   element.empty();
+   // 清空匹配的元素内容：
+   element.html(“ ”);
+   // remove() 删除元素本身，empt() 和 html(“”) 作用等价，都可以删除元素里面的内容，只不过 html 还可以设置内容
+   ```
+
+5. 尺寸方法
+
+   | 语法                                 | 用法                                                   |
+   | :----------------------------------- | :----------------------------------------------------- |
+   | `width()/height()`                   | 取得匹配元素宽度和高度值，只算 width/height            |
+   | `innerEidth()/innerHeight()`         | 取得匹配元素宽度和高度值，包含 padding                 |
+   | `outerWidth()/outerHeight()`         | 取得匹配元素宽度和高度值，包含 padding、border         |
+   | `outerWidth(true)/outerHeight(true)` | 取得匹配元素宽度和高度值，包含 padding、border、margin |
+
+6. 位置方法
+   - `offset()`
+     - 用于设置或返回被选元素相对于**文档**的偏移坐标，跟父级没有关系
+     - 属性：`offset().top`用于获取距离文档顶部的距离；`offset().left`用于获取距离文档左侧的距离
+     - 可以设置元素的偏移：`offset({top:10,left:30});`
+   - `position()`
+     - 用于返回被选元素相对于**带有定位的父级**偏移坐标，如果父级都没有定位，则以文档为准
+     - 属性：`position().top`用于获取距离定位父级顶部的距离;`position().left` 用于获取距离定位父级左侧的距离
+   - `scrollTop()/scrollLeft()`
+     - 设置或返回被选元素被卷去的头部
+     - 不跟参数是获取，参数为不带单位的数字则是设置被卷去的头部
+
+### 七、jQuery 事件
+
+1. 单个事件注册
+
+   ```javascript
+   // element.事件(function(){}); 其他事件和原生基本一致 eg.
+   $(“div”).click(function(){事件处理程序});
+   ```
+
+2. 事件处理 on() 绑定事件
+
+   ```javascript
+   element.on(events, [selector], fn);
+   // events:一个或多个用空格分隔的事件类型，如"click"或"keydown"
+   // selector:元素的子元素选择器
+   // fn:回调函数,即绑定在元素身上的侦听函数
+   ```
+
+   - 可以在匹配元素上绑定一个或多个事件
+   - 可以实现事件委派(事件委派：把原来加给 selector 身上的事件绑定在 element 身上，即把事件委派给 element，通过 selector 的状态进行触发)
+   - 可以给动态生成的元素绑定事件
+
+3. 事件处理 off() 解绑事件
+
+   ```javascript
+   // 解绑p元素所有事件处理程序
+   $('p').off();
+   // 解绑p元素上面的点击事件 后面的 foo 是侦听函数名
+   $('p').off('click');
+   // 解绑事件委托
+   $('ul').off('click', 'li');
+   ```
+
+4. 自动触发事件 trigger()
+
+   ```javascript
+   element.click();
+   // 此时自动触发事件，不需要鼠标点击
+   element.trigger('type');
+   // triggerHandler模式不会触发元素的默认行为，这是和前面两种的区别
+   element.triggerHandler('type');
+   ```
+
+5. 事件对象
+
+   ```javascript
+   element.on(events, [selector], function (event) {});
+   // 事件被触发，就会有事件对象的产生
+   // 阻止默认行为(两种方式)：
+   event.preventDefault();
+   return false;
+   // 阻止冒泡：
+   event.stopPropagation();
+   ```
+
+### 八、其他方法
+
+1. 对象拷贝
+
+   ```javascript
+   $.extend([deep], target, object1, [objectN]);
+   // deep: 如果设为true为深拷贝，默认为false浅拷贝
+   // target: 要拷贝的目标对象,原来的数据会被覆盖
+   // object1~N:待拷贝的对象
+   ```
+
+2. 多库共存
+3. 图片懒加载
+   - 当页面滑动到可视区域，再显示图片
+   - EasyLazyLoad.js
+4. 全屏滚动
+   - fullpage.js
 
 ---
 
-## Part Ⅳ 附录
+## Part Ⅳ JS 高级
+
+---
+
+## Part Ⅴ 附录
