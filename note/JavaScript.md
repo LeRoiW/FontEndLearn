@@ -1713,6 +1713,497 @@ eventTarget.addEventListener('click', function (event) {});
 
 ## Part Ⅳ JS 高级
 
+### 一、面向对象
+
+1. 面向过程编程(POP,Process-oriented programming)：分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候再一个一个的依次调用就可以了
+2. 面向对象编程(OOP,Object Oriented Programming)：把事务分解成为一个个对象，然后由对象之间分工与合作，**面向对象是以对象功能来划分问题，而不是过程**
+
+### 二、类和对象
+
+> 面向对象的思维特点
+>
+> > 抽取（抽象）对象共用的属性和行为组织(封装)成一个类(模板)  
+> > 对类进行实例化, 获取类的对象
+
+1. 对象：一组无序的相关属性和方法的集合
+   - 属性：事物的特征，在对象中用属性来表示（常用名词）
+   - 方法：事物的行为，在对象中用方法来表示（常用动词）
+2. 类：**抽象了对象的公共部分**，它泛指某一大类（class）；对象特指某一个，通过类实例化一个具体的对象
+3. 创建类
+
+   ```javascript
+   class name {
+     // class body
+   }
+   // 类必须使用 new 实例化对象
+   var obj = new name();
+   ```
+
+4. 类 constructor 构造函数
+
+   - constructor() 方法是类的构造函数(默认方法)，用于**传递参数**,**返回实例对象**，通过 new 命令生成对象实例时，**自动调用**该方法。
+   - 如果没有显示定义, 类内部会自动给我们创建一个 constructor()
+
+   ```javascript
+   class Person {
+     constructor(name, age) {
+       // constructor 构造方法或者构造函数
+       this.name = name;
+       this.age = age;
+     }
+   }
+   // 创建实例
+   var ldh = new Person('刘德华', 18);
+   console.log(ldh.name);
+   ```
+
+5. 类添加方法
+
+   ```javascript
+   // 方法之间不能加逗号分隔，同时方法不需要添加 function 关键字
+   class Person {
+     constructor(name, age) {
+       // constructor 构造器或者构造函数
+       this.name = name;
+       this.age = age;
+     }
+     say() {
+       console.log(this.name + '你好');
+     }
+   }
+   // 创建实例
+   var ldh = new Person('刘德华', 18);
+   ldh.say();
+   ```
+
+6. 继承
+
+   ```javascript
+   class Father {
+     // 父类
+   }
+   class Son extends Father {
+     // 子类继承父类
+   }
+   ```
+
+7. `super` 关键字
+
+   - 用于**访问和调用对象父类上的函数**。可以调用父类的构造函数，也可以调用父类的普通函数
+   - 子类在构造函数中使用 super, 必须放到 this 前面 (必须**先调用父类的构造方法**,在使用子类构造方法)
+
+   ```javascript
+   class Person {
+     // 父类
+     constructor(surname) {
+       this.surname = surname;
+     }
+   }
+   class Student extends Person {
+     // 子类继承父类
+     constructor(surname, firstname) {
+       super(surname); // 调用父类的constructor  (surname)
+       this.firstname = firstname; // 定义子类独有的属性
+     }
+   }
+   ```
+
+8. PS
+   - 在 ES6 中类没有变量提升，所以必须先定义类，才能通过类实例化对象
+   - 类里面的共有属性和方法一定要加 this 使用
+   - 类里面的 this 指向问题
+   - constructor 里面的 this 指向实例对象, 方法里面的 this 指向这个方法的调用者
+
+### 三、构造函数和原型
+
+#### 3.1 构造函数
+
+> 在典型的 OOP 的语言中（如 Java），都存在类的概念，类就是对象的模板，对象就是类的实例，但在 ES6 之前， JS 中并没用引入类的概念。在 ES6 之前 ，对象不是基于类创建的，而是用一种称为构建函数的特殊函数来定义对象和它们的特征
+
+&emsp;构造函数是一种特殊的函数，主要用于创建某一类对象(初始化对象，即为对象成员变量赋初始值)，其首字母要大写。它总与 new 一起使用。可以把对象中一些公共的属性和方法抽取出来，然后封装到这个函数里面。
+
+&emsp;new 在执行时会做四件事情：
+
+1. 在内存中创建一个新的空对象
+2. 让 this 指向这个新的对象
+3. 执行构造函数里面的代码，给这个新对象添加属性和方法
+4. 返回这个新对象(所以构造函数里面不需要 return)
+
+&emsp;JavaScript 的构造函数中可以添加一些成员，可以在构造函数本身上添加，也可以在构造函数内部的 this 上添加。通过这两种方式添加的成员，就分别称为静态成员和实例成员。
+
+- 静态成员：在构造函数本身上添加的成员称为静态成员，只能由构造函数本身来访问
+- 实例成员：在构造函数内部创建的对象成员称为实例成员，只能由实例化的对象来访问
+
+> 如果每个实例化的函数存放地址不同的话，就会造成内存泄漏问题
+
+#### 3.2 原型
+
+##### 3.2.1 原型对象 prototype
+
+&emsp;JavaScript 规定，**每个函数**都有一个 `prototype` 属性，**指向一个对象**，这个对象包含了可以由该构造函数的所有实例共享的属性和方法。对于构造函数来说，生成实例的时候，该属性会自动成为实例对象的原型。
+
+##### 3.2.2 对象原型(原型指针) \_\_proto\_\_
+
+&emsp;对象都会有一个属性 `__proto__` 指向**构造函数**的 `prototype` 原型对象，通过它对象可以使用(继承)构造函数 `prototype` 原型对象的属性和方法
+
+&emsp;`__proto__`对象原型的意义就在于为对象的查找机制提供一个方向，或者说一条路线(原型链)，但是它是一个非标准属性，因此实际开发中，不可以使用这个属性，它只是内部指向原型对象 `prototype`
+
+![__proto__](JavaScript_img/Part4/figure3-1.png)  
+&emsp;实例的`__proto__`等价于该实例的构造函数的`prototype`
+
+##### 3.2.3 constructor 构造函数
+
+&emsp;对象原型（ `__proto__`）和构造函数原型对象（`prototype`）里面都有一个 `constructor`属性，它指回构造函数本身。`constructor` 主要用于记录该对象引用于哪个构造函数，它可以让原型对象重新指向原来的构造函数。
+
+![constructor](JavaScript_img/Part4/figure3-2.png)
+
+##### 3.2.4 原型链
+
+![原型链](JavaScript_img/Part4/figure3-3.png)
+
+**概念**：  
+&emsp;原型链作为实现继承的主要方法，其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。  
+&emsp;每个构造函数都有一个原型对象(`prototype`)，原型对象都包含一个指向构造函数的指针(`constructor`)，而实例都包含一个指向原型对象的内部指针(`__proto__`)。  
+&emsp;那么，假如我们让原型对象等于另一个类型的实例，此时的原型对象将包含一个指向另一个原型的指针，相应地，另一个原型中也包含着一个指向另一个构造函数的指针。假如另一个原型又是另一个类型的实例，那么上述关系依然成立。如此层层递进，就构造了实例与原型的链条，这就是原型链的基本概念。
+
+**意义**：  
+&emsp;“原型链”的作用在于，当读取对象的某个属性时，JavaScript 引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。以此类推，如果直到最顶层的 `Object.prototype` 还是找不到，则返回 `undefine`
+
+**终点**：  
+&emsp;由于 `Object` 是构造函数，原型链终点是`Object.prototype.__proto__`，而 `Object.prototype.__proto__=== null // true`，所以，原型链的终点是 `null`。原型链上的所有原型都是对象，所有的对象最终都是由 `Object` 构造的，而 `Object.prototype` 的下一级是 `Object.prototype.__proto__`。
+
+##### 3.2.5 Analyse
+
+&emsp;首先是一张历史悠久且经典的图  
+![源远流长](JavaScript_img/Part4/figure3-4.jpg)
+
+&emsp;1+1=2 的部分结束，那么：
+
+1. 原型指针
+
+   ```javascript
+   var a = new Array();
+   a.__proto__ === Array.prototype; // true
+   // 上面代码创建了一个Array的实例a，该实例的原型指向了Array.prototype。
+   // Array.prototype本身也是一个对象，也有继承的原型:
+
+   a.__proto__.__proto__ === Object.prototype; // true
+   // 等同于 Array.prototype.__proto__ === Object.prototype
+   // 这就说明了，Array本身也是继承自Object的，那么Object的原型指向
+
+   a.__proto__.__proto__.__proto__ === null; // true
+   // 等同于 Object.prototype.__proto__ === null
+   ```
+
+   ![analyse](JavaScript_img/Part4/figure3-5.png)
+
+2. 原型对象
+
+   ```javascript
+   var Foo = function () {};
+   Foo.__proto__ === Function.prototype; // true
+   // 函数作为JavaScript中的一等公民，它既是函数又是对象，函数的原型指向的是Function.prototype
+
+   var a = new Foo();
+   a.__proto__ === Foo.prototype; // true
+   // 函数实例除了拥有__proto__属性之外，还拥有prototype属性。
+   // 通过该函数构造的新的实例对象，其原型指针__proto__会指向该函数的prototype属性。
+
+   Foo.prototype.__proto__ === Object.prototype; // true
+   // 而函数的prototype属性，本身是一个由Object构造的实例对象。
+
+   Foo.prototype.constructor === Foo; // true
+   a.constructor === Foo; // true
+   a.constructor === Foo.prototype.constructor; // true
+   // prototype属性很特殊，它还有一个隐式的constructor，指向了构造函数本身。
+   ```
+
+   ![analyse](JavaScript_img/Part4/figure3-6.png)
+
+3. 更直观的图
+
+   ![analyse](JavaScript_img/Part4/figure3-7.png)
+
+##### 3.2.7 补充
+
+1. 函数?对象
+   - **只有函数有`prototype`,对象是没有的**。
+   - 但是函数也是有`__proto__`的，因为函数也是对象。函数的`__proto__`指向的是`Function.prototype`。
+   - 也就是说普通函数是`Function`这个构造函数的一个实例。
+2. instanceof
+
+   - 运算符返回一个布尔值，表示一个对象是否由某个构造函数创建
+   - 原理：判断实例对象的`__proto__`和生成该实例的构造函数的`prototype`是不是引用的同一个地址
+
+   ![instanceof](JavaScript_img/Part4/figure3-8.png)
+
+#### 3.3 JavaScript 的成员查找机制(规则)
+
+1. 当访问一个对象的属性（包括方法）时，首先查找这个对象自身有没有该属性
+2. 如果没有就查找它的原型（也就是 `__proto__` 指向的 `prototype` 原型对象）
+3. 如果还没有就查找原型对象的原型（`Object`的原型对象）
+4. 依此类推一直找到 `Object` 为止（`null`）
+5. `__proto__`对象原型的意义就在于为对象成员查找机制提供一个方向，或者说一条路线
+
+#### 3.4 原型对象 this 指向
+
+&emsp;原型对象里面放的是方法，这个方法里面的 this 指向的是这个方法的调用者，也就是这个实例对象
+
+#### 3.5 继承
+
+1. call()
+
+   ```javascript
+   // 调用这个函数, 并且修改函数运行时的 this 指向
+   fun.call(thisArg, arg1, arg2, ...);
+   // thisArg ：当前调用函数 this 的指向对象
+   // arg1，arg2：传递的其他参数
+   ```
+
+2. 借用构造函数继承父类型属性
+
+   ```javascript
+   // 核心原理：通过 call() 把父类型的 this 指向子类型的 this ，这样就可以实现子类型继承父类型的属性
+   // 父类
+   function Person(name, age, sex) {
+     this.name = name;
+     this.age = age;
+     this.sex = sex;
+   }
+   // 子类
+   function Student(name, age, sex, score) {
+     Person.call(this, name, age, sex); // 此时父类的 this 指向子类的 this，同时调用这个函数
+     this.score = score;
+   }
+   var s1 = new Student('zs', 18, '男', 100);
+   console.dir(s1);
+   ```
+
+3. 借用原型对象继承父类型方法
+
+   - 一般情况下，对象的方法都在构造函数的原型对象中设置，通过构造函数无法继承父类方法
+   - 核心原理：
+     - 将子类所共享的方法提取出来，让`子类的 prototype 原型对象 = new 父类()`
+     - 本质：子类原型对象等于是实例化父类，因为父类实例化之后另外开辟空间，就不会影响原来父类原型对象
+     - 将子类的 `constructor` 从新指向子类的构造函数
+
+4. 类的本质：叫做`class`的构造函数
+
+#### 3.6 ES5 新增方法
+
+1. 数组方法
+
+   ```javascript
+   array.forEach(function(currentValue, index, arr))
+   // currentValue：数组当前项的值
+   // index：数组当前项的索引
+   // arr：数组对象本身
+
+    array.filter(function(currentValue, index, arr))
+   // filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素,主要用于筛选数组
+   // 注意它直接返回一个新数组
+
+    array.some(function(currentValue, index, arr))
+    // some() 方法用于检测数组中的元素是否满足指定条件。通俗点：查找数组中是否有满足条件的元素
+    // 注意它返回值是布尔值, 如果查找到这个元素, 就返回true , 如果查找不到就返回false
+    // 如果找到第一个满足条件的元素,则终止循环。不在继续查找
+
+   ```
+
+2. 字符串方法
+
+   ```javascript
+   str.trim();
+   // trim()  方法会从一个字符串的两端删除空白字符
+   // 并不影响原字符串本身，它返回的是一个新的字符串
+   ```
+
+3. 对象方法
+
+   ```javascript
+   Object.keys(obj);
+   // Object.keys() 用于获取对象自身所有的属性
+   // 效果类似 for…in
+   // 返回一个由属性名组成的数组
+
+   Object.defineProperty(obj, prop, descriptor);
+   // Object.defineProperty() 定义对象中新属性或修改原有的属性
+   // obj：必需。目标对象
+   // prop：必需。需定义或修改的属性的名字
+   // descriptor：必需。目标属性所拥有的特性
+
+   Object.defineProperty(obj, prop, descriptor);
+   // Object.defineProperty() 定义新属性或修改原有的属性。
+   // 第三个参数 descriptor 说明： 以对象形式 { } 书写
+   // value: 设置属性的值  默认为undefined
+   // writable: 值是否可以重写。true | false  默认为false
+   // enumerable: 目标属性是否可以被枚举。true | false 默认为 false
+   // configurable: 目标属性是否可以被删除或是否可以再次修改特性 true|false  默认为false
+   ```
+
+### 四、函数进阶
+
+#### 4.1 函数
+
+&emsp;**函数的定义方式**：
+
+1. 函数声明方式 function 关键字 (命名函数)
+2. 函数表达式 (匿名函数)
+3. new Function()
+
+   ```javascript
+   var fn = new Function('参数1','参数2'..., '函数体')
+   // Function 里面参数都必须是字符串格式
+   // 第三种方式执行效率低，也不方便书写，因此较少使用
+   // 所有函数都是 Function 的实例(对象)
+   // 函数也属于对象
+   ```
+
+   ![函数定义](JavaScript_img/Part4/figure4-1.png)
+
+&emsp;**函数的调用方式**：  
+&emsp;普通函数、对象的方法、构造函数、绑定事件函数、定时器函数、立即执行函数
+
+#### 4.2 this
+
+##### 4.2.1 函数内 this 的指向
+
+| 调用方式     | this 指向                                  |
+| :----------- | :----------------------------------------- |
+| 普通函数调用 | window                                     |
+| 构造函数调用 | 实例对象(原型对象里边的方法也指向实例对象) |
+| 对象方法调用 | 该方法所属对象                             |
+| 事件绑定方法 | 绑定事件对象(调用者)                       |
+| 定时器函数   | window                                     |
+| 立即执行函数 | window                                     |
+
+##### 4.2.2 改变函数内部 this 指向
+
+1. call 方法
+
+   ```javascript
+    fun.call(thisArg, arg1, arg2, ...)
+    // thisArg：在 fun 函数运行时指定的 this 值
+    // arg1，arg2：传递的其他参数
+    // 返回值就是函数的返回值，因为它就是调用函数
+    // 会调用函数
+   ```
+
+2. apply 方法
+
+   ```javascript
+   fun.apply(thisArg, [argsArray]);
+   // thisArg：在fun函数运行时指定的 this 值
+   // argsArray：传递的值，必须包含在数组里面
+   // 返回值就是函数的返回值，因为它就是调用函数
+   // apply()会调用函数,主要跟数组有关系，比如使用 Math.max() 求数组的最大值
+   ```
+
+3. bind 方法
+
+   ```javascript
+    fun.bind(thisArg, arg1, arg2, ...)
+    // thisArg：在 fun 函数运行时指定的 this 值
+    // arg1，arg2：传递的其他参数
+    // 返回由指定的 this 值和初始化参数改造的原函数拷贝
+    // bind() 方法不会调用函数
+   ```
+
+4. 总结
+   - 相同点:
+     - 都可以改变函数内部的 this 指向
+   - 区别点:
+     - `call()` 和 `apply()` 会调用函数，并且改变函数内部 this 指向
+     - `call()` 和 `apply()` 传递的参数不一样，`call()` 传递参数 `aru1, aru2..`形式, `apply()` 必须数组形式`[arg]`
+     - `bind()` 不会调用函数，可以改变函数内部 this 指向.
+   - 主要应用场景:
+     - `call()` 经常做继承
+     - `apply()` 经常跟数组有关系。比如借助于数学对象实现数组最大值最小值
+     - `bind()` 不调用函数,但是还想改变 this 指向. 比如改变定时器内部的 this 指向.
+
+#### 4.3 严格模式
+
+&emsp;JavaScript 除了提供正常模式外，还提供了严格模式（strict mode）。ES5 的严格模式是采用具有限制性 JavaScript 变体的一种方式，即在严格的条件下运行 JS 代码。严格模式在 IE10 以上版本的浏览器中才会被支持，旧版本浏览器中会被忽略。  
+&emsp;严格模式对正常的 JavaScript 语义做了一些更改：
+
+1. 消除了 Javascript 语法的一些不合理、不严谨之处，减少了一些怪异行为。
+2. 消除代码运行的一些不安全之处，保证代码运行的安全。
+3. 提高编译器效率，增加运行速度。
+4. 禁用了在 ECMAScript 的未来版本中可能会定义的一些语法，为未来新版本的 Javascript 做好铺垫。比如一些保留字如：class, enum, export, extends, import, super 不能做变量名
+
+##### 4.3.1 开启严格模式
+
+1. 为脚本开启严格模式
+
+   ```html
+   <!-- 为整个脚本文件开启严格模式，需要在所有语句之前放一个特定语句“use strict”;（或‘use strict’;）。 -->
+   <script>
+     'use strict';
+     console.log('这是严格模式。');
+   </script>
+
+   <!-- 有的 script 基本是严格模式，有的 script 脚本是正常模式，这样不利于文件合并，所以可以将整个脚本文件放在一个立即执行的匿名函数之中。这样独立创建一个作用域而不影响其他 script 脚本文件。 -->
+   <script>
+     (function () {
+       'use strict';
+       var num = 10;
+       function fn() {}
+     })();
+   </script>
+   ```
+
+2. 为函数开启严格模式
+
+   ```javascript
+   // 要给某个函数开启严格模式，需要把“use strict”;  (或 'use strict'; ) 声明放在函数体所有语句之前
+   function fn() {
+     'use strict';
+     return '这是严格模式。';
+   }
+   // 将 "use strict" 放在函数体的第一行，则整个函数以 "严格模式" 运行。
+   ```
+
+##### 4.3.2 严格模式中的变化
+
+1. 变量规定
+   - 在正常模式中，如果一个变量没有声明就赋值，默认是全局变量。严格模式禁止这种用法，变量都必须先用 var 命令声明，然后再使用
+   - 严禁删除已经声明变量。例如，delete x; 语法是错误的。
+2. 严格模式下 this 指向问题
+   - 以前在全局作用域函数中的 this 指向 window 对象。
+   - 严格模式下全局作用域中函数中的 this 是 undefined。
+   - 以前构造函数时不加 new 也可以调用,当普通函数，this 指向全局对象
+   - 严格模式下,如果构造函数不加 new 调用, this 指向的是 undefined 如果给他赋值则会报错
+   - new 实例化的构造函数指向创建的对象实例。
+   - 定时器 this 还是指向 window 。
+   - 事件、对象还是指向调用者。
+3. 函数变化
+   - 函数不能有重名的参数。
+   - 函数必须声明在顶层.新版本的 JavaScript 会引入“块级作用域”（ ES6 中已引入）。为了与新版本接轨，不允许在非函数的代码块内声明函数。
+
+#### 4.4 高阶函数
+
+#### 4.5 闭包
+
+##### 4.5.1 变量作用域
+
+&emsp;变量根据作用域的不同分为两种：全局变量和局部变量。
+
+1. 函数内部可以使用全局变量。
+2. 函数外部不可以使用局部变量。
+3. 当函数执行完毕，本作用域内的局部变量会销毁。
+
+##### 4.5.2 闭包
+
+&emsp;**闭包（closure）指有权访问另一个函数作用域中变量的函数。** ----- JavaScript 高级程序设计
+
+&emsp;闭包作用：延伸变量的作用范围
+
 ---
+
+#### 4.6 递归
+
+&emsp;如果一个函数在内部可以调用其本身，那么这个函数就是递归函数。  
+&emsp;简单理解:函数内部自己调用自己, 这个函数就是递归函数  
+&emsp;由于递归很容易发生“栈溢出”错误（stack overflow），所以**必须要加退出条件 return**。
 
 ## Part Ⅴ 附录
